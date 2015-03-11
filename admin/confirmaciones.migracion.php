@@ -5,11 +5,7 @@
 	include_once "../model/fixture.php";
 	include_once "../model/equipos.php";
 	require_once "include/PHPExcel/PHPExcel.php";
-
-	if(!session_is_registered("usuario")){
-		header("Location: index.php");
-		exit;
-	}
+	include_once "include/control_session.php";
 	
 	$menu = "Secciones";
 	

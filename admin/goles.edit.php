@@ -3,11 +3,7 @@
 	include_once "../model/equipos.php";	
 	include_once "../model/jugadoras.php";	
 	include_once "../model/golesAnteriores.php";
-		
-	if(!session_is_registered("usuario")){
-		header("Location: index.php");
-		exit;
-	}
+	include_once "include/control_session.php";
 	
 	$operacion = "Goles Anteriores";
 

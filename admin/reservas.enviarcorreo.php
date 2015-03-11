@@ -1,11 +1,7 @@
 <?	include_once "include/config.inc.php";
 	include_once "../model/fechas.php";
 	include_once "../model/correos.php";
-
-	if(!session_is_registered("usuario")){
-		header("Location: index.php");
-		exit;
-	}
+	include_once "include/control_session.php";
 	
 	$menu = "Secciones";
 	$idFecha = $_POST['id'];

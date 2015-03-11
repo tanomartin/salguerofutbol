@@ -1,11 +1,7 @@
 <?	include_once "include/config.inc.php";
 	require_once "include/PHPExcel/PHPExcel.php";
 	include_once "../model/sedes.php";
-
-	if(!session_is_registered("usuario")){
-		header("Location: index.php");
-		exit;
-	}
+	include_once "include/control_session.php";
 
 	$oSede= new Sedes();
 	$sede = $oSede->get($_POST['idSede']);

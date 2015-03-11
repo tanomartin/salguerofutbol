@@ -51,8 +51,8 @@
 			$db = new Db();
 
 				$query = "insert into ga_usuarios_adm (
-							usuario 		,
-							clave 	,
+							usuario,
+							clave,
 							nombre,
 							apellido,
 							esAdmin ) values (".
@@ -83,11 +83,11 @@
 			$db = new Db();
 
 				$query = "update ga_usuarios_adm set ".
-							" usuario 		    = '".$this->usuario."',". 		
-							" clave 	        = '".md5($this->clave)."',". 	
-							" nombre        = '".$this->nombre ."',".
-							" nombre        = '".$this->apellido ."',".
-							" esAdmin        = '".$this->esAdmin ."',".
+							" usuario = '".$this->usuario."',". 		
+							" clave = '".md5($this->clave)."',". 	
+							" nombre = '".$this->nombre ."',".
+							" nombre = '".$this->apellido ."',".
+							" esAdmin = '".$this->esAdmin ."',".
 							" where id_usuario = '".$this->id_usuario."'"; 
 	
 				$db->query($query); 
@@ -120,9 +120,9 @@
 			$db = new Db();
 
 			$query = "update ga_usuarios_adm set ".
-						" clave	        = '".md5($clave_nueva)."' ".
+						" clave = '".md5($clave_nueva)."' ".
 						" where usuario = '".$this->usuario."'
-						  and   clave   = '".md5($clave_actual)."'"; 
+						  and clave = '".md5($clave_actual)."'"; 
 
 			$db->query($query); 
 			$db->close();

@@ -6,7 +6,7 @@ function cambiaf_a_normal($fecha){
 	$lafecha = $fecha;
 
 	if (strpos($fecha,"-") > 0) {
-	    ereg("([0-9]{2,4})-([0-9]{1,2})-([0-9]{1,2})", $fecha, $mifecha); 
+	    preg_match("/([0-9]{2,4})-([0-9]{1,2})-([0-9]{1,2})/", $fecha, $mifecha); 
     	$lafecha=$mifecha[3]."/".$mifecha[2]."/".$mifecha[1]; 
 	}
 		
@@ -21,7 +21,7 @@ function cambiaf_a_mysql($fecha){
 	$lafecha = $fecha;
 
 	if (strpos($fecha,"/") > 0) {
-	    ereg("([0-9]{1,2})/([0-9]{1,2})/([0-9]{2,4})", $fecha, $mifecha); 
+	    preg_match("/([0-9]{1,2})/([0-9]{1,2})/([0-9]{2,4})/", $fecha, $mifecha); 
 	    $lafecha=$mifecha[3]."-".$mifecha[2]."-".$mifecha[1]; 
     }
 	
@@ -74,8 +74,8 @@ $dFecFin = str_replace("-","",$dFecFin);
 $dFecFin = str_replace("/","",$dFecFin);
 
 
-ereg( "([0-9]{1,2})([0-9]{1,2})([0-9]{2,4})", $dFecIni, $aFecIni);
-ereg( "([0-9]{1,2})([0-9]{1,2})([0-9]{2,4})", $dFecFin, $aFecFin);
+preg_match("/([0-9]{1,2})([0-9]{1,2})([0-9]{2,4})/", $dFecIni, $aFecIni);
+preg_match("/([0-9]{1,2})([0-9]{1,2})([0-9]{2,4})/", $dFecFin, $aFecFin);
 
 $date1 = mktime(0,0,0,$aFecIni[2], $aFecIni[1], $aFecIni[3]);
 $date2 = mktime(0,0,0,$aFecFin[2], $aFecFin[1], $aFecFin[3]);
