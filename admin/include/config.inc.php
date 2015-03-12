@@ -4,9 +4,9 @@
 	include_once "_funciones.php";
 
 	define( 'DB_SERVER',                  'localhost'     );
-	define( 'DB_SERVER_USERNAME',         'vv000461_gambeta' );
-        define( 'DB_SERVER_PASSWORD',         	'buTE14gila'      );
-	define( 'DB_DATABASE',                'vv000461_gambeta'   );
+	define( 'DB_SERVER_USERNAME',         'salguerofutbol' );
+    define( 'DB_SERVER_PASSWORD',         'salguerofutbol'      );
+	define( 'DB_DATABASE',                'salguerofutbol'   );
 	// Defino constantes
 	define("_DB1_",						"mysql");
 	define("DIR_INC",					"../model/");
