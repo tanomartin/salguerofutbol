@@ -47,7 +47,7 @@
     
 </form>
 <div id="logo">
-	<a href="paneldecontrol.php" title="Volver al incio"><h1> Panel de Control</h1></a>
+	<a href="paneldecontrol.php" title="Volver al incio"><h1> Panel de Control - Salguero Futbol</h1></a>
 </div>
 <!-- indexer::stop -->
 <div class="mod_navigation block" id="mainmenu">
