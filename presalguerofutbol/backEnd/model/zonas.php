@@ -1,5 +1,4 @@
 <?PHP
-include_once "include/config.inc.php";
 include_once "mysql.class.php";
 
 class Zonas {
