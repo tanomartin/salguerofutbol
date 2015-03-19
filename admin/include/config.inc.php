@@ -4,8 +4,8 @@
 	include_once "_funciones.php";
 
 	define( 'DB_SERVER',                  'localhost'     );
-	define( 'DB_SERVER_USERNAME',         'salguerofutbol' );
-    define( 'DB_SERVER_PASSWORD',         'salguerofutbol'      );
+	define( 'DB_SERVER_USERNAME',         'salguero' );
+    define( 'DB_SERVER_PASSWORD',         'salguero'      );
 	define( 'DB_DATABASE',                'salguerofutbol'   );
 	// Defino constantes
 	define("_DB1_",						"mysql");
