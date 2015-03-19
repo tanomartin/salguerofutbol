@@ -145,8 +145,6 @@ class Fixture {
 
 
 	function getPaginado($filtros, $inicio, $cant, &$total) {
-		$orden = ($filtros["filter_order"])?$filtros["filter_order"]:"x.id";
-		$dir = ($filtros["filter_order_Dir"])?$filtros["filter_order_Dir"]:"desc"; 
 		$db = new Db();
 		$query = "Select SQL_CALC_FOUND_ROWS  x.*, f.nombre as fecha, e1.nombre as equipo1, e2.nombre as equipo2, t.nombre as torneo, z.nombreCorto as zona
 		          from partidos x
@@ -163,7 +161,7 @@ class Fixture {
 			$query.= " and  t.nombre  like '%".strtoupper($filtros["ftorneo"])."%'";		  
 		if (trim($filtros["fcategoria"]) != "")		 
 			$query.= " and  z.nombreCorto like '%".strtoupper($filtros["fcategoria"])."%'";		  
-		$query.= " order by  $orden $dir LIMIT $inicio,$cant";
+		$query.= " order by fechaPartido DESC, horaPartido DESC LIMIT $inicio,$cant";
 		$datos = $db->getResults($query, ARRAY_A); 
 		$cant_reg = $db->getResults("SELECT FOUND_ROWS() cant", ARRAY_A); 
 		$total = ceil( $cant_reg[0]["cant"] / $cant );

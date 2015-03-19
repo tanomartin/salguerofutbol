@@ -1,8 +1,6 @@
 <?	include_once "include/config.inc.php";
 	include_once "../model/zonas.php";
 	include_once "include/control_session.php";
-	
-	$menu = "Secciones";
 
 	switch ($_POST["accion"]) {
 		case "editar":
@@ -127,11 +125,6 @@
                     <input name="fnombreCorto" type="text" style="width:50px" value="<?=$_POST["fnombreCorto"]?>"  />
                     Nombre Largo:
                     <input name="fnombreLargo" type="text" style="width:100px" value="<?=$_POST["fnombreLargo"]?>"  />
-                    <!-- Parametros menu -->
-                    <input type="hidden" name="menu" value="<?=$_POST["menu"]?>" />
-                    <input type="hidden" name="submenu" value="<?=$_POST["submenu"]?>" />
-                    <input type="hidden" name="pag_submenu" value="<?=$_POST["pag_submenu"]?>" />
-                    <!--     -->
                     <input type="hidden" name="_pag" value="<?=$pag?>" />
                     <input type="hidden" name="id" value="<?=$_POST["id"]?>" />
                     <input type="hidden" name="accion" value="" />
@@ -144,11 +137,6 @@
                 <input type="hidden" name="_pag" value="<?=$pag?>" />
                 <input type="hidden" name="id" value="<?=$_POST["id"]?>" />
                 <input type="hidden" name="accion" value="" />
-                <!-- Parametros menu -->
-                <input type="hidden" name="menu" value="<?=$_POST["menu"]?>" />
-                <input type="hidden" name="submenu" value="<?=$_POST["submenu"]?>" />
-                <input type="hidden" name="pag_submenu" value="<?=$_POST["pag_submenu"]?>" />
-                <!--     -->
                 <!-- Filtros -->
                 <input type="hidden" name="fnombre" value="<?=$_POST["fnombre"]?>" />
                 <!-- Fin filtros -->

@@ -84,11 +84,6 @@
               <!-- Filtros -->
               <input type="hidden" name="fnombre" value="<?=$_POST["fnombre"]?>" />
               <!-- Fin filtros -->
-              <!-- Parametros menu -->
-              <input type="hidden" name="menu" value="<?=$_POST["menu"]?>" />
-              <input type="hidden" name="submenu" value="<?=$_POST["submenu"]?>" />
-              <input type="hidden" name="pag_submenu" value="<?=$_POST["pag_submenu"]?>" />
-              <!--     -->
               <div class="formbody">
                 <div class="ce_table">
                   <fieldset>

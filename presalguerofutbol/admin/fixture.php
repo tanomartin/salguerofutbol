@@ -1,11 +1,7 @@
 <?	include_once "include/config.inc.php";
 	include_once "include/fechas.php";
 	include_once "../model/fixture.php";
-	//include_once "../model/resultados.php";
-	//include_once "../model/jugadoras.php";
 	include_once "include/control_session.php";
-
-	$menu = "Gestion";
 
 	switch ($_POST["accion"]) {
 		
@@ -119,11 +115,6 @@
             <div class="mod_listing ce_table listing block" id="partnerlist">
               <div >
                 <form name="frm_busqueda" id="frm_busqueda" action="<?=$_SERVER['PHP_SELF']?>" method="post">
-                  <!-- Parametros menu -->
-                  <input type="hidden" name="menu" value="<?=$_POST["menu"]?>" />
-                  <input type="hidden" name="submenu" value="<?=$_POST["submenu"]?>" />
-                  <input type="hidden" name="pag_submenu" value="<?=$_POST["pag_submenu"]?>" />
-                  <!--     -->
                   <div class="formbody"> Nombre Equipo:
                     <input name="fnombre" type="text" style="width:100px" value="<?=$_POST["fnombre"]?>"  />
                     Torneo:
@@ -138,15 +129,7 @@
               <form name="frm_listado" id="frm_listado" action="<?=$_SERVER['PHP_SELF']?>" method="post">
                 <input type="hidden" name="_pag" value="<?=$pag?>" />
                 <input type="hidden" name="id" value="<?=$_POST["id"]?>" />
-                <input type="hidden" name="activo" value="" />
-                <input type="hidden" name="pos" value="" />
-                <input type="hidden" name="orden" value="" />
                 <input type="hidden" name="accion" value="" />
-                <!-- Parametros menu -->
-                <input type="hidden" name="menu" value="<?=$_POST["menu"]?>" />
-                <input type="hidden" name="submenu" value="<?=$_POST["submenu"]?>" />
-                <input type="hidden" name="pag_submenu" value="<?=$_POST["pag_submenu"]?>" />
-                <!--     -->
                 <!-- Filtros -->
                 <input type="hidden" name="fnombre" value="<?=$_POST["fnombre"]?>" />
                 <input name="ftorneo" type="hidden" style="width:100px" value="<?=$_POST["ftorneo"]?>"  />
@@ -194,7 +177,7 @@
                   </tr>
                   <? if (count($datos) == 0) { ?>
                   <tr>
-                    <td colspan="7" align="center">No existen Partido</td>
+                    <td colspan="9" align="center">No existen Partido</td>
                   </tr>
                   <? } else { 
 				 	$total = count($datos);	

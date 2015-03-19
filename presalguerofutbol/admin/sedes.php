@@ -1,9 +1,6 @@
 <?	include_once "include/config.inc.php";
 	include_once "../model/sedes.php";
 	include_once "include/control_session.php";
-	
-	$menu = "Secciones";
-
 
 	switch ($_POST["accion"]) {
 		case "editar":
@@ -125,13 +122,7 @@
             <div class="mod_listing ce_table listing block" id="partnerlist">
               <div >
                 <form name="frm_busqueda" id="frm_busqueda" action="<?=$_SERVER['PHP_SELF']?>" method="post">
-                  <div class="formbody"> Nombre:
-                    <input name="fnombreCorto" type="text" style="width:50px" value="<?=$_POST["fnombre"]?>"  />
-                    <!-- Parametros menu -->
-                    <input type="hidden" name="menu" value="<?=$_POST["menu"]?>" />
-                    <input type="hidden" name="submenu" value="<?=$_POST["submenu"]?>" />
-                    <input type="hidden" name="pag_submenu" value="<?=$_POST["pag_submenu"]?>" />
-                    <!--     -->
+                  <div class="formbody"> Nombre:<input name="fnombre" type="text" style="width:50px" value="<?=$_POST["fnombre"]?>"  />
                     <input type="hidden" name="_pag" value="<?=$pag?>" />
                     <input type="hidden" name="id" value="<?=$_POST["id"]?>" />
                     <input type="hidden" name="accion" value="" />
@@ -144,11 +135,6 @@
                 <input type="hidden" name="_pag" value="<?=$pag?>" />
                 <input type="hidden" name="id" value="<?=$_POST["id"]?>" />
                 <input type="hidden" name="accion" value="" />
-                <!-- Parametros menu -->
-                <input type="hidden" name="menu" value="<?=$_POST["menu"]?>" />
-                <input type="hidden" name="submenu" value="<?=$_POST["submenu"]?>" />
-                <input type="hidden" name="pag_submenu" value="<?=$_POST["pag_submenu"]?>" />
-                <!--     -->
                 <!-- Filtros -->
                 <input type="hidden" name="fnombre" value="<?=$_POST["fnombre"]?>" />
                 <!-- Fin filtros -->

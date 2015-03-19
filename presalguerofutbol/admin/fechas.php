@@ -4,8 +4,6 @@
 	include_once "../model/torneos.zonas.php";
 	include_once "include/control_session.php";
 
-	$menu = "Secciones";
-
 	//print_r($_POST);
 
 	switch ($_POST["accion"]) {
@@ -118,11 +116,6 @@
             <div class="mod_listing ce_table listing block" id="partnerlist">
               <div >
                 <form name="frm_busqueda" id="frm_busqueda" action="<?=$_SERVER['PHP_SELF']?>" method="post">
-                  <!-- Parametros menu -->
-                  <input type="hidden" name="menu" value="<?=$_POST["menu"]?>" />
-                  <input type="hidden" name="submenu" value="<?=$_POST["submenu"]?>" />
-                  <input type="hidden" name="pag_submenu" value="<?=$_POST["pag_submenu"]?>" />
-                  <!--     -->
                   <div class="formbody"> Nombre:
                     <input name="fnombre" type="text" style="width:100px" value="<?=$_POST["fnombre"]?>"  />
                     Torneo:
@@ -137,15 +130,7 @@
               <form name="frm_listado" id="frm_listado" action="<?=$_SERVER['PHP_SELF']?>" method="post">
                 <input type="hidden" name="_pag" value="<?=$pag?>" />
                 <input type="hidden" name="id" value="<?=$_POST["id"]?>" />
-                <input type="hidden" name="activo" value="" />
-                <input type="hidden" name="pos" value="" />
-                <input type="hidden" name="orden" value="" />
                 <input type="hidden" name="accion" value="" />
-                <!-- Parametros menu -->
-                <input type="hidden" name="menu" value="<?=$_POST["menu"]?>" />
-                <input type="hidden" name="submenu" value="<?=$_POST["submenu"]?>" />
-                <input type="hidden" name="pag_submenu" value="<?=$_POST["pag_submenu"]?>" />
-                <!--     -->
                 <!-- Filtros -->
                 <input type="hidden" name="fnombre" value="<?=$_POST["fnombre"]?>" />
                 <input name="ftorneo" type="hidden" style="width:100px" value="<?=$_POST["ftorneo"]?>"  />

@@ -121,7 +121,7 @@ class Fechas {
 			$query.= " and  t.nombre  like '%".strtoupper($filtros["ftorneo"])."%'";		  
 		if (trim($filtros["fcategoria"]) != "")		 
 			$query.= " and  z.nombreLargo like '%".strtoupper($filtros["fcategoria"])."%'";		  
-		$query.= " order by  $orden $dir LIMIT $inicio,$cant";
+		$query.= " order by e.fechaIni DESC, e.fechaFin DESC  LIMIT $inicio,$cant";
 		$datos = $db->getResults($query, ARRAY_A); 
 		$cant_reg = $db->getResults("SELECT FOUND_ROWS() cant", ARRAY_A); 
 		$total = ceil( $cant_reg[0]["cant"] / $cant );

@@ -1,34 +1,27 @@
 <?	include_once "include/config.inc.php";
-	include_once "../model/equipos.php";
-	include_once "../model/torneos.zonas.php";
+	include_once "../model/goleadores.php";
 	include_once "include/control_session.php";
 
 	switch ($_POST["accion"]) {
-		
 		case "editar":
-			include("equipos.edit.php");
-			exit;
-			break;
-			
-		case "ver":
-			include("equipos.edit.php");
+			include("goleadores.edit.php");
 			exit;
 			break;
 			
 		case "guardar":	
 			$data =   $_POST;
-			$oObj = new Equipos();
+			$oObj = new Goleadores();
 			$oObj->set($data);
 			if($_POST["id"] == "-1") { // Tiene el valor de session_id()
-				$oObj->insertar();
+				$oObj->agregar();
 			} else {
-				$oObj->actualizar();
+				$oObj->modificar();
 			}
 			break;
 
 		case "borrar":
 			$data =   $_POST;
-			$oObj = new Equipos();
+			$oObj = new Goleadores();
 			$oObj->set($data);
 			$oObj->eliminar();
 			$_POST["_pag"] = ($_POST["ult"] == "S") ? $_POST["_pag"] - 1 : $_POST["_pag"];
@@ -43,13 +36,17 @@
 	// fin Paginacion
 
 	$total = 0;
-	$oObj = new Equipos();
+	$oObj = new Goleadores();
 	$datos = $oObj->getPaginado($_REQUEST, $inicio, $cant, $total);
-
-	$esultimo = (count($datos) == 1)? "S" : "N" ;
 	
+	if(count($datos) == 0) {
+		$pag --;
+		$inicio = ($pag - 1) * $cant;
+		$datos = $oObj->getPaginado($_REQUEST, $inicio, $cant, $total);
+	}
+	
+?>
 
-	?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
 <head>
@@ -69,14 +66,6 @@
 		document.frm_listado.submit();
 		
 	}
-	
-	function password(id){
-		
-		document.frm_listado.accion.value = "password";
-		document.frm_listado.id.value = id;
-		document.frm_listado.submit();
-		
-	}
 
 	function editar(id){
 		
@@ -85,24 +74,7 @@
 		document.frm_listado.submit();
 		
 	}
-	
-	function ver(id){
-		
-		document.frm_listado.accion.value = "ver";
-		document.frm_listado.id.value = id;
-		document.frm_listado.submit();
-		
-	}
-	
-	function idioma(id){
-		
-		document.frm_listado.accion.value = "idioma";
-		document.frm_listado.submenu.value = "Idiomas";
-		document.frm_listado.id.value = id;
-		document.frm_listado.submit();
-		
-	}
-	
+
 	function borrar(id){
 		
 		document.frm_listado.accion.value = "borrar";
@@ -110,29 +82,7 @@
 		document.frm_listado.submit();
 		
 	}
-
-	function info(id){
-		
-		document.frm_listado.accion.value = "info";
-		document.frm_listado.id.value = id;
-		document.frm_listado.submit();
-		
-	}
-
-	function cambiarActivo(id,activo) {
-		document.frm_listado.activo.value=activo;
-		document.frm_listado.id.value = id;
-		document.frm_listado.accion.value = "cambiarActivo";
-		document.frm_listado.submit();
-	   
-	}
-	function cambiarOrden(pos,orden) {
-		document.frm_listado.pos.value=pos;
-		document.frm_listado.orden.value =orden;
-		document.frm_listado.accion.value = "cambiarOrden";
-		document.frm_listado.submit();
-	   
-	}
+	
 
 </script>
 </head>
@@ -155,12 +105,10 @@
             <div class="mod_listing ce_table listing block" id="partnerlist">
               <div >
                 <form name="frm_busqueda" id="frm_busqueda" action="<?=$_SERVER['PHP_SELF']?>" method="post">
-                  <div class="formbody"> Nombre:
-                    <input name="fnombre" type="text" style="width:100px" value="<?=$_POST["fnombre"]?>"  />
-                    Torneo:
-                    <input name="ftorneo" type="text" style="width:100px" value="<?=$_POST["ftorneo"]?>"  />
-                    Zona:
-                    <input name="fcategoria" type="text" style="width:100px" value="<?=$_POST["fcategoria"]?>"  />
+                  <div class="formbody"> Nombre: <input name="fnombre" type="text" style="width:50px" value="<?=$_POST["fnombre"]?>"  />
+                    <input type="hidden" name="_pag" value="<?=$pag?>" />
+                    <input type="hidden" name="id" value="<?=$_POST["id"]?>" />
+                    <input type="hidden" name="accion" value="" />
                     <input class="submit" value="Buscar" type="submit" style="font-size:11px" />
                     <input class="submit" value="Limpiar" type="button" style="font-size:11px" onclick="javascript:limpiar('frm_busqueda'); document.frm_busqueda.submit();" />
                   </div>
@@ -172,8 +120,6 @@
                 <input type="hidden" name="accion" value="" />
                 <!-- Filtros -->
                 <input type="hidden" name="fnombre" value="<?=$_POST["fnombre"]?>" />
-                <input name="ftorneo" type="hidden" style="width:100px" value="<?=$_POST["ftorneo"]?>"  />
-                <input name="fcategoria" type="hidden" style="width:100px" value="<?=$_POST["fcategoria"]?>"  />
                 <!-- Fin filtros -->
                 <div style="margin-left:20px; float:left" >
                   <? if ($total != 0) {	?>
@@ -201,31 +147,31 @@
                   <? } ?>
                 </div>
                 <div align="right" style="margin-right:10px; margin-bottom:10px" >
-                  <input class="button" onclick="javascript:nuevo()" type="button" value="Nuevo Equipo" />
+                  <input class="button" onclick="javascript:nuevo()" type="button" value="Nuevo Goleador" />
                 </div>
                 <table width="928">
                   <tr>
+                    <th width="5%">#</th>
                     <th >Nombre</th>
-                    <th width="15%">Torneo</th>
-                    <th width="15%">Zona</th>
+					<th >Equipo</th>
+					<th >Goles</th>
                     <th width="10%">Opciones</th>
                   </tr>
                   <? if (count($datos) == 0) { ?>
                   <tr>
-                    <td colspan="4" align="center">No existen equipos</td>
+                    <td colspan="5" align="center">No existen Goleadores </td>
                   </tr>
                   <? } else { 
-				 	$total = count($datos);	
-					$tt = $total - 1;
-					for ( $i = 0; $i < $total; $i++ ) {
+				 
+					for ( $i = 0; $i < count($datos); $i++ ) {
         			
 				?>
-                  <tr>
+                  <tr style="vertical-align:middle" >
+                    <td align="left"><?=$datos[$i]["id"]?></td>
                     <td align="left"><?=$datos[$i]["nombre"]?></td>
-                    <td align="left"><?=$datos[$i]["torneo"]?></td>
-                    <td align="left"><?=$datos[$i]["zona"]?></td>
-                    <td nowrap><a href="javascript:ver(<?=$datos[$i]["id"]?>);"></a> <a href="javascript:editar(<?=$datos[$i]["id"]?>);"> <img border="0" src="images/icono-editar.gif" alt="editar" title="editar" /></a> <a href="javascript:borrar(<?=$datos[$i]["id"]?>);"><img border="0" src="images/icono-eliminar.gif" alt="eliminar" title="eliminar" /></a> <a href="javascript:password(<?=$datos[$i]["id"]?>);"></a>
-                      <!--	<a href="javascript:idioma(<?=$datos[$i]["id"]?>);"> <img border="0" src="images/idioma.jpg" alt="idioma" title="idioma"  width="20" height="20"/></a>--></td>
+				    <td align="left"><?=$datos[$i]["equipo"]?></td>
+					<td align="left"><?=$datos[$i]["goles"]?></td>
+                    <td nowrap><a href="javascript:editar(<?=$datos[$i]["id"]?>);"> <img border="0" src="images/icono-editar.gif" alt="editar" title="editar" /></a> <a href="javascript:borrar(<?=$datos[$i]["id"]?>);"><img border="0" src="images/icono-eliminar.gif" alt="eliminar" title="eliminar" /></a> </td>
                   </tr>
                   <? } }?>
                 </table>

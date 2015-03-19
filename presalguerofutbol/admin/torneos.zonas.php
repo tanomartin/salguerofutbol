@@ -1,6 +1,6 @@
 <?	include_once "include/config.inc.php";
 	include_once "include/control_session.php";
-	
+		
 	$oObj = new Torneos();
 	$datosTorneo = $oObj->get($_POST['id']);
 
@@ -57,11 +57,6 @@
                 <input type="hidden" name="id_torneo_categoria" value="" />
                 <input type="hidden" name="id_categoria" value="" />
                 <input type="hidden" name="accion" value="" />
-                <!-- Parametros menu -->
-                <input type="hidden" name="menu" value="<?=$_POST["menu"]?>" />
-                <input type="hidden" name="submenu" value="<?=$_POST["submenu"]?>" />
-                <input type="hidden" name="pag_submenu" value="<?=$_POST["pag_submenu"]?>" />
-                <!--     -->
                 <div style="float:left">
                   <h2>Torneo:
                     <?= $datosTorneo[0]['nombre'] ?>

@@ -41,7 +41,7 @@
     </li>
     
 	<? if (strpos($_SERVER['PHP_SELF'], "index.php") == 0 ) {?>
-	<li class="<? if( $_POST["menu"]== "Secciones") echo "active"; ?>  submenu "><span class="submenu">Conf. del Torneo</span>
+	<li class="submenu"><span class="submenu">Conf. del Torneo</span>
 	  <ul style="visibility: visible; opacity: 1;" class="level_2">
 	    <li class="first">
 	      <a href="#" title="Torneos"  class="first"  onclick="this.blur(); ir('Torneos', '', 'torneos.php', 'torneos.php')">Torneos</a>
@@ -58,7 +58,7 @@
       </ul>
     </li> 
 	
-	<li class=<? if( $menu == "Parametros") echo "active"; ?> "submenu"><span class="submenu">Par&aacute;metros</span>
+	<li class="submenu"><span class="submenu">Par&aacute;metros</span>
 	  <ul style="visibility: visible; opacity: 1;" class="level_2">
 	    <li class="first">
 	      <a href="#" title="Sedes" class="first" onclick="this.blur(); ir('Sedes', '', 'sedes.php', 'sedes.php')">Sedes</a>
@@ -66,7 +66,7 @@
       </ul>
     </li>
 	
-	<li class="<? if( $_POST["menu"]== "Gestion") echo "active"; ?>  submenu "><span class="submenu">Gesti&oacute;n del Torneo</span>
+	<li class="submenu"><span class="submenu">Gesti&oacute;n del Torneo</span>
 	  <ul style="visibility: visible; opacity: 1;" class="level_2">
 	    <li class="first">
 	      <a href="#" title="Partidos"  class="first"  onclick="this.blur(); ir('Fixture', '', 'fixture.php', 'fixture.php')">Partidos</a>

@@ -1,15 +1,16 @@
 <?	include_once "include/config.inc.php";
 	include_once "../model/sedes.php";
+	include_once "../model/equipos.php";
 	include_once "include/control_session.php";
 	
 	$operacion = "Alta";
 
 	if ($_POST["id"] != -1) {
 		$operacion = "Modificaci&oacute;n";
-		$oSedes= new Sedes();
-		$datos = $oSedes->get($_POST["id"]);
+		$oGoleador= new Goleadores();
+		$datos = $oGoleador->get($_POST["id"]);
 	}
-
+	
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
@@ -24,7 +25,6 @@
 <script language="javascript">
 
 	function volver(){
-	
 		document.form_alta.accion.value = "volver";		
 		document.form_alta.submit();
 	}
@@ -49,7 +49,7 @@
           <div class="ce_text block">
             <h1>
               <?=$operacion?>
-              de Sedes</h1>
+              de Goleador </h1>
           </div>
           <!-- indexer::stop -->
           <div class="mod_registration g8 tableform block">
@@ -63,13 +63,36 @@
               <div class="formbody">
                 <div class="ce_table">
                   <fieldset>
-                  <legend>Datos de la Sede </legend>
+                  <legend>Datos del Goleador </legend>
                   <table summary="Personal data" cellpadding="0" cellspacing="0">
                     <tbody>
                       <tr class="even">
                         <td class="col_0 col_first"><label for="id_opcion">Nombre</label>
                           <span class="mandatory">*</span></td>
                         <td class="col_1 col_last"><input name="nombre" id="nombre" class="required text" maxlength="100"  size="50" type="text" value="<?=$datos[0]["nombre"]?>"></td>
+                      </tr>
+                      <tr class="even">
+                        <td class="col_0 col_first"><label for="nombre">Equipo </label>
+                            <span class="mandatory">*</span></td>
+                        <td class="col_1 col_last"><span id="Equipo1List">
+                          <?
+							$oEquipos = new Equipos();
+							$aEquipos = $oEquipos->get();?>
+						  <select name="idEquipo" id="idEquipo" <?= $disabled ?> class="validate-selection" >
+                            <option value="-1">Seleccione un Equipo...</option>
+                        <?
+							for ($i=0;$i<count($aEquipos);$i++) { ?>
+								<option <? if($aEquipos[$i]["id"] == $datos[0]["idEquipo"]) echo "selected"; ?> value="<?=$aEquipos[$i]["id"]?>">
+								<?=$aEquipos[$i]["nombre"]." - ".$aEquipos[$i]["zona"]?>
+								</option>
+                         <? } ?>
+                          </select>
+                          <span id="advice3"> </span> </span> </td>
+                      </tr>
+                      <tr class="even">
+                        <td class="col_0 col_first"><label for="label">Goles </label>
+                          <span class="mandatory">*</span></td>
+                        <td class="col_1 col_last"><input name="goles" id="goles" class="required text" maxlength="5"  size="5" type="text" value="<?=$datos[0]["goles"]?>" /></td>
                       </tr>
                     </tbody>
                   </table>
@@ -85,8 +108,8 @@
           </div>
           <!-- indexer::continue -->
           <div class="ce_text g4 xpln block">
-            <p><strong>Datos de la Sede </strong><br>
-              Ingrese los datos de la Sede</p>
+            <p><strong>Datos del Goleador </strong><br>
+              Ingrese los datos del Goleador</p>
             <p>Los campos marcados con <span class="mandatory">*</span> son de ingreso obligatorio.</p>
           </div>
           <div class="clear"></div>

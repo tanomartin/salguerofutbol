@@ -2,8 +2,6 @@
 	include_once "../model/torneos.php";
 	include_once "../model/zonas.php";
 
-   	//instancio editor
-
   	$operacion = "Alta";
 
 	if ($_POST["id_torneo_categoria"] != -1) {
@@ -73,11 +71,6 @@
               <input name="_pag" id="_pag"  value="<?=$_POST["_pag"]?>" type="hidden" />
               <input type="hidden" name="accion" value="guardarCategoria" />
               <input name="idtemporal" id="idtemporal"  value="<?=$id_torneo_categoria?>" type="hidden" />
-              <!-- Parametros menu -->
-              <input type="hidden" name="menu" value="<?=$_POST["menu"]?>" />
-              <input type="hidden" name="submenu" value="<?=$_POST["submenu"]?>" />
-              <input type="hidden" name="pag_submenu" value="<?=$_POST["pag_submenu"]?>" />
-              <!--     -->
               <div class="ce_table">
                 <fieldset>
                 <table width="108%" cellpadding="0" cellspacing="0" summary="Personal data">

@@ -5,8 +5,6 @@
 	//include_once "../model/categorias.php";
 	include_once "include/control_session.php";
 
-	$menu = "Secciones";
-
 	switch ($_POST["accion"]) {
 		case "editar":
 			include("torneos.edit.php");
@@ -209,11 +207,6 @@
                 <input type="hidden" name="pos" value="" />
                 <input type="hidden" name="orden" value="" />
                 <input type="hidden" name="accion" value="" />
-                <!-- Parametros menu -->
-                <input type="hidden" name="menu" value="<?=$_POST["menu"]?>" />
-                <input type="hidden" name="submenu" value="<?=$_POST["submenu"]?>" />
-                <input type="hidden" name="pag_submenu" value="<?=$_POST["pag_submenu"]?>" />
-                <!--     -->
                 <!-- Filtros -->
                 <input type="hidden" name="fnombre" value="<?=$_POST["fnombre"]?>" />
                 <!-- Fin filtros -->
