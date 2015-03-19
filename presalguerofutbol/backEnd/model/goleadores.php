@@ -32,7 +32,7 @@ class Goleadores {
 	
 	function get($id="") {
 		$db = new Db();
-		$query = "Select c.* from goleadores c where 1=1 " ;
+		$query = "Select c.*, e.nombre as equipo from goleadores c, equipos e where c.idEquipo = e.id" ;
 		if ($id != "") {
 			$query .= " and c.id = '$id' ";
 		}
