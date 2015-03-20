@@ -1,5 +1,4 @@
 <?PHP
-include_once "include/_funciones.php";
 include_once "mysql.class.php";
 
 class Torneos {
@@ -131,6 +130,18 @@ class Torneos {
 		$query = "Select * from torneos" ;
 		if ($id != "") {
 			$query .= " where id = '$id' ";
+		}
+		$query .= " order by orden";	  
+		$res = $db->getResults($query, ARRAY_A); 
+		$db->close();
+		return $res;
+	}
+
+	function getActivos($id="") {
+		$db = new Db();
+		$query = "Select * from torneos where activo = 1" ;
+		if ($id != "") {
+			$query .= " and id = '$id' ";
 		}
 		$query .= " order by orden";	  
 		$res = $db->getResults($query, ARRAY_A); 

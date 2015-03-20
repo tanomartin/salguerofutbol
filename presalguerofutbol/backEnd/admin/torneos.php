@@ -1,8 +1,6 @@
 <?	include_once "include/config.inc.php";
 	include_once "../model/torneos.php";
 	include_once "../model/torneos.zonas.php";
-	//include_once "../model/pantallasFijas.php";
-	//include_once "../model/categorias.php";
 	include_once "include/control_session.php";
 
 	switch ($_POST["accion"]) {

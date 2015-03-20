@@ -171,9 +171,9 @@
                 <table width="928">
                   <tr>
                     <th width="5%">#</th>
-                    <th width="35%">Nombre Largo</th>
                     <th width="30%">Nombre Corto</th>
-                    <th width="20%">Nombre P&aacute;gina</th>
+                    <th width="20%">Bajada</th>
+					<th width="35%">Descripción</th>
                     <th width="10%">Opciones</th>
                   </tr>
                   <? if (count($datos) == 0) { ?>
@@ -187,9 +187,9 @@
 				?>
                   <tr style="vertical-align:middle" >
                     <td align="left"><?=$datos[$i]["id"]?></td>
-                    <td align="left"><?=$datos[$i]["nombreLargo"]?></td>
                     <td align="left"><?=$datos[$i]["nombreCorto"]?></td>
                     <td align="left"><?=$datos[$i]["nombrePagina"]?></td>
+					<td align="left"><?=$datos[$i]["nombreLargo"]?></td>
                     <td nowrap><a href="javascript:editar(<?=$datos[$i]["id"]?>);"> <img border="0" src="images/icono-editar.gif" alt="editar" title="editar" /></a> <a href="javascript:borrar(<?=$datos[$i]["id"]?>);"><img border="0" src="images/icono-eliminar.gif" alt="eliminar" title="eliminar" /></a> </td>
                   </tr>
                   <? } }?>

@@ -81,7 +81,7 @@
 
 				?>
                   <tr style="vertical-align:middle" >
-                    <td align="left"><?=$datos[$i]["nombreLargo"]?></td>
+                    <td align="left"><?=$datos[$i]["nombreCorto"]?></td>
                     <td nowrap><a href="javascript:subcategorias(<?=$datos[$i]["id_categoria"]?>);"></a> <a href="javascript:borrar(<?=$datos[$i]["id"]?>);"><img border="0" src="images/icono-eliminar.gif" alt="eliminar" title="eliminar" /></a> </td>
                   </tr>
                   <? } }?>

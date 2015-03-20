@@ -82,11 +82,10 @@
                           <option value="-1" selected="selected" >Seleccione Zona...</option>
                           <?
 							for ($i=0;$i<count($datosCat);$i++) 
-							{
-								
+							{							
 							?>
                           <option  value="<?=$datosCat[$i]["id"]?>" >
-                          <?=$datosCat[$i]["nombreLargo"]?>
+                          	<?=$datosCat[$i]["nombreCorto"]?>
                           </option>
                           <?
                         	}
