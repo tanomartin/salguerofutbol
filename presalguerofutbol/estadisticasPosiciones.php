@@ -4,24 +4,26 @@ include_once "include/templateEngine.inc.php";
 include_once "backEnd/model/torneos.php";
 include_once "backEnd/model/torneos.zonas.php";
 include_once "backEnd/model/posiciones.php";
+include_once "backEnd/model/zonas.php";
 
-$oTorneos = new Torneos($_GET['idTorneoActivo']);
-$torneos = $oTorneos->getActivos();
-
-$oZonas = new TorneoZona();
-$zonas = $oZonas->getByTorneo($_GET['idTorneoActivo']);
-
-$oPosiciones = new Posiciones();
-$tablas = array();
-if ($zonas != NULL) {
-	foreach($zonas as $zona) {
-		$idZona = $zona["id"];
-		$aTabla = $oPosiciones->armarTabla($idZona);
-		$tablas[$idZona] = array("zona" => $zona, "tabla" => $aTabla);
+$torneosZonas = array();
+$oObj = new Torneos();
+$torneos = $oObj->getActivos();
+if ($torneos != NULL) {
+	foreach ($torneos as $torneo) {
+		$oZonas = new TorneoZona();
+		$zonas = $oZonas->getByTorneo($torneo["id"]);
+		$torneosZonas[$torneo["id"]] = array("torneo" => $torneo, "zonas" => $zonas);
 	}
 }
-	
+
+$oZonas = new Zonas();
+$zona = $oZonas->get($_GET['idZonaActiva']);
+
+$oPosiciones = new Posiciones();
+$tabla = $oPosiciones->armarTabla($_GET['idZonaActiva']);
+
 // Cargo la plantilla
-$twig->display('estadisticasPosiciones.html',array("torneos" => $torneos, "idTorneoActivo" => $_GET['idTorneoActivo'], "posiciones" => $tablas));
+$twig->display('estadisticasPosiciones.html',array("torneosZonas" => $torneosZonas, "idTorneoActivo" => $_GET['idTorneoActivo'], "tabla" => $tabla, "zona" => $zona[0]));
 
 ?>

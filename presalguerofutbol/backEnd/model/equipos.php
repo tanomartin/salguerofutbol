@@ -59,7 +59,7 @@ class Equipos {
 	
 	function get($id="") {
 		$db = new Db();
-		$query = "Select e.*, tz.id_torneo, tz.id_zona, tz.id as idTorneoZona, t.nombre as torneo, z.nombreLargo as zona
+		$query = "Select e.*, tz.id_torneo, tz.id_zona, tz.id as idTorneoZona, t.nombre as torneo, z.nombreCorto as zona
 				  from equipos e, torneos t, torneos_zonas tz, zonas z
 				  where e.idTorneoZona = tz.id and tz.id_torneo = t.id and tz.id_zona = z.id " ;
 		if ($id != "") {
@@ -87,7 +87,7 @@ class Equipos {
 		$orden = ($filtros["filter_order"])?$filtros["filter_order"]:"e.id";
 		$dir = ($filtros["filter_order_Dir"])?$filtros["filter_order_Dir"]:"asc"; 
 		$db = new Db();
-		$query = "Select SQL_CALC_FOUND_ROWS  e.*, t.nombre as torneo, z.nombreLargo as zona
+		$query = "Select SQL_CALC_FOUND_ROWS  e.*, t.nombre as torneo, z.nombreCorto as zona
 		          from equipos e, torneos t, torneos_zonas tz, zonas z
 				  where e.idTorneoZona = tz.id and tz.id_torneo = t.id and tz.id_zona = z.id ";
 		if (trim($filtros["fnombre"]) != "")		

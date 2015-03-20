@@ -4,13 +4,18 @@ include_once "include/templateEngine.inc.php";
 include_once "backEnd/model/torneos.php";
 include_once "backEnd/model/torneos.zonas.php";
 
+$torneosZonas = array();
 $oObj = new Torneos();
-$datos = $oObj->getActivos();
-
-$oZonas = new TorneoZona();
-$zonas = $oZonas->getByTorneo($_GET['idTorneoActivo']);
+$torneos = $oObj->getActivos();
+if ($torneos != NULL) {
+	foreach ($torneos as $torneo) {
+		$oZonas = new TorneoZona();
+		$zonas = $oZonas->getByTorneo($torneo["id"]);
+		$torneosZonas[$torneo["id"]] = array("torneo" => $torneo, "zonas" => $zonas);
+	}
+}
 
 // Cargo la plantilla
-$twig->display('mainestadisticas.html',array("torneos" => $datos, "zonas" => $zonas));
+$twig->display('mainestadisticas.html',array("torneosZonas" => $torneosZonas));
 
 ?>

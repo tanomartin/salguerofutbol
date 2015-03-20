@@ -178,7 +178,7 @@
                   </tr>
                   <? if (count($datos) == 0) { ?>
                   <tr>
-                    <td colspan="4" align="center">No existen Zonas</td>
+                    <td colspan="5" align="center">No existen Zonas</td>
                   </tr>
                   <? } else { 
 				 

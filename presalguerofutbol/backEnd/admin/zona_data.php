@@ -13,7 +13,7 @@
         	<option value="-1">Seleccione una Categor&iacute;a...</option>
     <? }
        for ($i=0;$i<count($aTorneoZona);$i++) { ?>		
-            <option value="<?=$aTorneoZona[$i]["id"]?>"><?=$aTorneoZona[$i]["nombreLargo"]?> <? if ( $aTorneoZona[$i]["nombreCat"] != "" ){ echo "- ". $aTorneoCat[$i]["nombreCat"]; } ?></option>
+            <option value="<?=$aTorneoZona[$i]["id"]?>"><?=$aTorneoZona[$i]["nombreCorto"]?> <? if ( $aTorneoZona[$i]["nombreCat"] != "" ){ echo "- ". $aTorneoCat[$i]["nombreCat"]; } ?></option>
     <? } ?>
        </select>
 <? } else { ?>

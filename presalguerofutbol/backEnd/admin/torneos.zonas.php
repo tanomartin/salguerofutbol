@@ -63,7 +63,7 @@
                   </h2>
                 </div>
                 <div style="margin-right:10px; margin-bottom:10px; float:right" >
-                  <input class="button" onclick="javascript:nuevo()" type="button" value="Nueva Zona" />
+                  <input class="button" onclick="javascript:nuevo()" type="button" value="Asignar Zona" />
                 </div>
                 <br/>
                 <table width="928">

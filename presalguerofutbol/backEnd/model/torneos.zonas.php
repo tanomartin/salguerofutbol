@@ -75,7 +75,7 @@ class TorneoZona {
 	
 	function getByTorneo($id,$order ="") {
 		$db = new Db();
-		$query = "Select tz.*, z.nombreLargo,z.nombreCorto,z.nombrePagina
+		$query = "Select tz.*, z.nombreCorto,z.nombreCorto,z.nombrePagina
 				  From torneos_zonas tz, zonas z
 				  Where tz.id_zona = z.id and id_torneo = '".$id."'";
 		if ($order != "")
@@ -100,7 +100,7 @@ class TorneoZona {
 	
 	function getByTorneoFechas($id,$order ="") {
 		$db = new Db();
-		$query = "Select tz.*, z.nombreLargo, z.nombreCorto, z.nombrePagina
+		$query = "Select tz.*, z.nombreCorto, z.nombreCorto, z.nombrePagina
 				  From torneos_zonas tz left join zonas z
 				  on tz.id_zona = z.id 
 				  where id_torneo = '".$id."'";
