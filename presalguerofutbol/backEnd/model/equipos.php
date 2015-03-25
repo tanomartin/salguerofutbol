@@ -121,7 +121,7 @@ class Equipos {
 		$query = "Select e.*
 				  from equipos e
 				  where e.id <>  '$id' and 
-				  e.idTorneoZona = (select idTorneoZona from equipos  where id = '$id')";
+				  e.idTorneoZona = (select idTorneoZona from equipos  where id = '$id') order by e.nombre";
 		$res = $db->getResults($query, ARRAY_A); 
 		$db->close();
 		return $res;

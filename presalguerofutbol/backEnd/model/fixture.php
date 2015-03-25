@@ -31,9 +31,9 @@ class Fixture {
 			$this->fechaPartido = cambiaf_a_mysql($valores[0]["fechaPartido"]);
 			$this->horaPartido = $valores[0]["horaPartido"];
 			$this->idSede = $valores[0]["idSede"];
-			$this->cancha = $valores[0]["cancha"];
-			$this->golesEquipo1 = ($valores[0]["golesEquipo1"])?$valores[0]["golesEquipo1"]:-1; 
-			$this->golesEquipo2 = ($valores[0]["golesEquipo2"])?$valores[0]["golesEquipo2"]:-1; 
+			$this->cancha = $valores[0]["cancha"]; 
+			if ($valores[0]["golesEquipo1"] == '') { $this->golesEquipo1 = -1; } else {  $this->golesEquipo1 = $valores[0]["golesEquipo1"]; }
+			if ($valores[0]["golesEquipo2"] == '') { $this->golesEquipo2 = -1; } else {  $this->golesEquipo2= $valores[0]["golesEquipo2"]; }
 			$this->amonestadosEquipo1 = ($valores[0]["amonestadosEquipo1"])?$valores[0]["amonestadosEquipo1"]:0; 
 			$this->amonestadosEquipo2 = ($valores[0]["amonestadosEquipo2"])?$valores[0]["amonestadosEquipo2"]:0; 
 			$this->expulsadosEquipo1 = ($valores[0]["expulsadosEquipo1"])?$valores[0]["expulsadosEquipo1"]:0; 
@@ -52,8 +52,8 @@ class Fixture {
 		$this->horaPartido = $valores["horaPartido"];
 		$this->idSede = $valores["idSede"];
 		$this->cancha = $valores["cancha"];
-		$this->golesEquipo1 = ($valores["golesEquipo1"])?$valores["golesEquipo1"]:-1; 
-		$this->golesEquipo2 = ($valores["golesEquipo2"])?$valores["golesEquipo2"]:-1; 
+		if ($valores["golesEquipo1"] == '') { $this->golesEquipo1 = -1; } else {  $this->golesEquipo1 = $valores["golesEquipo1"]; }
+		if ($valores["golesEquipo2"] == '') { $this->golesEquipo2 = -1; } else {  $this->golesEquipo2 = $valores["golesEquipo2"]; }
 		$this->amonestadosEquipo1 = ($valores["amonestadosEquipo1"])?$valores["amonestadosEquipo1"]:0; 
 		$this->amonestadosEquipo2 = ($valores["amonestadosEquipo2"])?$valores["amonestadosEquipo2"]:0; 
 		$this->expulsadosEquipo1 = ($valores["expulsadosEquipo1"])?$valores["expulsadosEquipo1"]:0; 

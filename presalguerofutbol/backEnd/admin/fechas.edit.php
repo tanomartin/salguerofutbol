@@ -107,7 +107,7 @@
 							{
 						?>
                             <option <? if($aTorneoZona[$i]["id"] == $datos[0]["idTorneoZona"]) echo "selected"; ?> value="<?=$aTorneoZona[$i]["id"]?>">
-                            <?=$aTorneoZona[$i]["nombreLargo"]?>
+                            <?=$aTorneoZona[$i]["nombreCorto"]?>
                             <? if ( $aTorneoZona[$i]["nombreCat"] != "" ){ echo "- ". $aTorneoZona[$i]["nombreCat"]; } ?>
                             </option>
                             <?							

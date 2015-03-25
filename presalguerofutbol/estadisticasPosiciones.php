@@ -4,6 +4,7 @@ include_once "include/templateEngine.inc.php";
 include_once "backEnd/model/torneos.php";
 include_once "backEnd/model/torneos.zonas.php";
 include_once "backEnd/model/posiciones.php";
+include_once "backEnd/model/cruces.php";
 include_once "backEnd/model/zonas.php";
 include_once "backEnd/model/fixture.php";
 
@@ -19,22 +20,11 @@ if ($torneos != NULL) {
 }
 
 $cruce = array();
+$oCruces = new Cruces();
+$cruce = $oCruces->armarCruces($_GET['idTorneoZonaActiva']);
+
 $oEquipo = new Equipos();
 $equiposTorneo = $oEquipo -> getTorneoCat($_GET['idTorneoZonaActiva']);
-$oFixture = new Fixture();
-if ($equiposTorneo != NULL) {
-	foreach ($equiposTorneo as $equipo1) {
-		foreach ($equiposTorneo as $equipo2) {
-			$idCruce = $equipo1['id'].$equipo2['id'];
-			$resultado = $oFixture -> resultadoPartido($equipo1['id'], $equipo2['id'], $_GET['idTorneoZonaActiva']);
-			if ($resultado != NULL) {
-				$cruce[$idCruce] = array($equipo1['id'] => $resultado[0]['golesEquipo1'], $equipo2['id'] => $resultado[0]['golesEquipo2']);
-			} else {
-				$cruce[$idCruce] = array($equipo1['id'] => '', $equipo2['id'] => '');
-			}
-		}
-	}
-}
 
 $oZonas = new Zonas();
 $zona = $oZonas->get($_GET['idZonaActiva']);

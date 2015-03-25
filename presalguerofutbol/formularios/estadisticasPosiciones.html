@@ -110,9 +110,10 @@
 	<h5> {{ zona.nombrePagina }}</h5>
 	<h3> Posiciones </h3>
 		{% if tabla != null %}
-				<table border="1" cellpadding="0" cellspacing="0" width="800" align="center">
+				<table border="1" cellpadding="0" cellspacing="0" width="900" align="center">
 					<thead>
 						<tr> 
+						  <th style="text-align:center" width="5%"></th>
 						  <th style="text-align:center" width="35%">Equipo</th>
 						  <th style="text-align:center" width="5%">Pts.</th>
 						  <th style="text-align:center" width="5%">Jug.</th>
@@ -130,8 +131,11 @@
 						</tr>
 					</thead>
 					<tbody>	
+						 {% set contador = 1 %}
 						 {% for linea in tabla %}
 						  <tr>
+						  	<td><b>{{ contador }}</b></td>
+							{% set contador = contador + 1 %}
 							<td><b>{{ linea.nombre }}</b></td>
 							<td>{{ linea.puntaje  }}</td>
 							<td>{{ linea.par_ganados +  linea.par_perdidos + linea.par_empatados }}</td>
@@ -158,20 +162,24 @@
  <div class="copy">
 	<h3> Cruces </h3>
  		{% if equipos != null %}
- 			<table border="1" cellpadding="0" cellspacing="0" width="800" align="center">
+ 			<table border="1" cellpadding="0" cellspacing="0" width="900" align="center">
 			   <thead>
 			    <tr>
 					<th style="text-align:center" width="5%"></td>
 			   		<th style="text-align:center" width="30%">Equipo</td>
+					{% set contador = 1 %}
 					{% for equipo in equipos %}
-						<th style="text-align:center">{{ equipo['id'] }}</th>	
+						<th style="text-align:center">{{ contador }}</th>	
+						{% set contador = contador + 1 %}
 					{% endfor %}
 				</tr>
 			   </thead>
 			   <tbody>
+				{% set contador = 1 %}
 				{% for equipo1 in equipos  %}
 					<tr>
-						<td><b>{{ equipo1['id'] }}</b></td>
+						<td><b>{{ contador }}</b></td>
+						{% set contador = contador + 1 %}
 						<td><b>{{ equipo1['nombre'] }}</b></td>
 						{% for equipo2 in equipos %}
 							{% if (equipo1['id'] == equipo2['id']) %}
