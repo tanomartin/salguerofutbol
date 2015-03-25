@@ -21,6 +21,7 @@ class Posiciones {
 			$gano1=0;$perdio1=0;$empato1=0;
 			$gano2=0;$perdio2=0;$empato2=0;			
 			foreach($aEquipos as $key => $valor) {
+				$aEquipoR[$valor['id']]['id'] = $valor['id'];
 				$aEquipoR[$valor['id']]['nombre'] = $valor['nombre'];
 				$aEquipoR[$valor['id']]['par_ganados'] = 0;
 				$aEquipoR[$valor['id']]['par_perdidos'] = 0;
@@ -65,7 +66,6 @@ class Posiciones {
 			}	
 			arsort($puntajes);
 			foreach ($puntajes as $key => $row) {
-				
 				$aTabla[]=	$aEquipoR[$key];
 			}
 		} 

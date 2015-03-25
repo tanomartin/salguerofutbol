@@ -20,7 +20,7 @@ class Fixture {
     var $idSede;
     var $cancha;	
 	
-	function Equipos($id="") {
+	function Fixture($id="") {
 		if ($id != "") {
 			$valores = $this->get($id);
 			$this->id = $valores[0]["id"]; 
@@ -39,7 +39,7 @@ class Fixture {
 			$this->expulsadosEquipo1 = ($valores[0]["expulsadosEquipo1"])?$valores[0]["expulsadosEquipo1"]:0; 
 			$this->expulsadosEquipo2 = ($valores[0]["expulsadosEquipo2"])?$valores[0]["expulsadosEquipo2"]:0; 
 			$this->suspendido = ($valores[0]["suspendido"]=='on')?1:0; 
-			}
+		}
 	}
 
 	function set($valores){
@@ -229,16 +229,11 @@ class Fixture {
 		return $datos;	
 	}
 	
-	/*function jugaronEnContra( $id_equipo1="", $id_equipo2="" , $idTorneoCat = "", $idFecha = "") {
-	
+	function jugaronEnContra( $id_equipo1="", $id_equipo2="" , $idTorneoZona = "") {
 		$db = new Db();
-	
-		$query = "SELECT count(*) as cantidad FROM partidos p,  ga_fechas f where p.idEquipo1 = $id_equipo1 and p.idEquipo2 = $id_equipo2 and p.idFecha = f.id and golesEquipo1>-1 and golesEquipo2>-1 and p.idFecha != $idFecha and f.idTorneoCat = $idTorneoCat;";
-		
+		$query = "SELECT count(*) as cantidad FROM partidos p, fechas f where p.idEquipo1 = $id_equipo1 and p.idEquipo2 = $id_equipo2 and p.idFecha = f.id and golesEquipo1>-1 and golesEquipo2>-1 and f.idTorneoZona = $idTorneoZona";
 		$res = $db->getRow($query); 
-	
 		$db->close();
-		
 		if($res->cantidad == 0) {
 			return false;
 		} else {
@@ -247,21 +242,16 @@ class Fixture {
 	
 	}
 	
-	function resultadoPartido( $id_equipo1="", $id_equipo2="" , $idTorneoCat = "", $idFecha = "") {
+	function resultadoPartido( $id_equipo1="", $id_equipo2="" , $idTorneoZona = "") {
 		$db = new Db();
-	
-		$query = "SELECT p.golesEquipo1, p.golesEquipo2 FROM partidos p,  ga_fechas f where p.idEquipo1 = $id_equipo1 and p.idEquipo2 = $id_equipo2 and p.idFecha = f.id and golesEquipo1>-1 and golesEquipo2>-1 and p.idFecha != $idFecha and f.idTorneoCat = $idTorneoCat;";
-		
+		$query = "SELECT p.golesEquipo1, p.golesEquipo2 FROM partidos p, fechas f where p.idEquipo1 = $id_equipo1 and p.idEquipo2 = $id_equipo2 and p.idFecha = f.id and golesEquipo1>-1 and golesEquipo2>-1 and f.idTorneoZona = $idTorneoZona";
 		$res = $db->getRow($query); 
-	
 		$datos = $db->getResults($query, ARRAY_A); 
-	
 		$db->close();
-		
 		return $datos;
 	}
 	
-	function juegaEstaFecha( $id_equipo1="", $id_equipo2="" , $idTorneoCat = "", $idFecha = "") {
+	/*function juegaEstaFecha( $id_equipo1="", $id_equipo2="" , $idTorneoCat = "", $idFecha = "") {
 		
 		$db = new Db();
 	

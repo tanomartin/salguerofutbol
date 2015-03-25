@@ -85,20 +85,24 @@ License URL: http://creativecommons.org/licenses/by/3.0/
   <div class="copy">
   <div class="collapse navbar-collapse">
     <ul class="nav nav-tabs">
-      <li class="active"> <a href="mainestadisticas.php">Torneos</a></li>
+      <li> <a href="mainestadisticas.php">Torneos</a></li>
 	  	{% for torneozona in torneosZonas %} 
-			<li class="dropdown"> 
+			{% if torneozona.torneo.id == idTorneoActivo %} 
+				<li class="dropdown; active"> 
+			{% else %} 
+				<li class="dropdown">
+			{% endif %} 
 				<a class="dropdown-toggle" data-toggle="dropdown" href="#">{{ torneozona.torneo.nombre }} <span class="caret"></span></a>
 				<ul class="dropdown-menu  multi-level">
 				  <li class="dropdown-submenu">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown">Tabla de posiciones </a>
 						<ul class="dropdown-menu">
-							{% for zona in torneozona.zonas %} 
-                            	<li><a href="estadisticasPosiciones.php?idZonaActiva={{ zona.id }}&idTorneoActivo={{ torneo.id }}"> {{ zona.nombreCorto }} </a></li>
+							{% for torenoZona in torneozona.zonas %} 
+                            	<li><a href="estadisticasPosiciones.php?idTorneoZonaActiva={{ torenoZona.id }}&idZonaActiva={{ torenoZona.id_zona }}&idTorneoActivo={{ torneozona.torneo.id }}"> {{ torenoZona.nombreCorto }} </a></li>
 							{% endfor %}
 						</ul>
 				  </li>
-				  <li> <a href="estadisticasGoleadores.php?idTorneoActivo={{ torneo.id }}"> Goleadores </a> </li>
+				  <li> <a href="estadisticasGoleadores.php?idTorneoActivo={{ torneozona.torneo.id }}"> Goleadores </a> </li>
 				  <li> <a href="#"> Resultados ultima fecha </a></li>
 				  <li> <a href="#"> Horarios proxima fecha </a> </li>
 				  <li> <a href="#"> PlayOff 2014 </a> </li>
