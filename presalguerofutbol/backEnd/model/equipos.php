@@ -110,7 +110,7 @@ class Equipos {
 		$query = "Select e.*
 				  from equipos e
 				  where e.idTorneoZona =  '$id'" ;
-		$query .= " order by e.nombre";
+		$query .= " order by e.id";
 		$res = $db->getResults($query, ARRAY_A); 
 		$db->close();
 		return $res;

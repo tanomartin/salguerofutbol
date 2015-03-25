@@ -35,7 +35,6 @@ if ($equiposTorneo != NULL) {
 		}
 	}
 }
-//var_dump($cruce);
 
 $oZonas = new Zonas();
 $zona = $oZonas->get($_GET['idZonaActiva']);

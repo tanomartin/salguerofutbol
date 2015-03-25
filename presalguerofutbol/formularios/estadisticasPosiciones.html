@@ -64,7 +64,6 @@
     <li class="active grid"><a class="color5" href="torneos.html">torneoS</a></li>
     <li class="active grid"><a class="color9" href="servicios.html">SERVICIOS</a></li>
     <li class="active grid"><a class="color4" href="contacto.html">CONTACTO</a></li>
-    <div class="clearfix"> </div>
   </ul>
 </div>
 <img src="images/headergenerico.jpg" class="img-responsive" alt=""/>
@@ -114,8 +113,7 @@
 				<table border="1" cellpadding="0" cellspacing="0" width="800" align="center">
 					<thead>
 						<tr> 
-						  <th style="text-align:center" width="5%"></th>	
-						  <th style="text-align:center" width="30%">Equipo</th>
+						  <th style="text-align:center" width="35%">Equipo</th>
 						  <th style="text-align:center" width="5%">Pts.</th>
 						  <th style="text-align:center" width="5%">Jug.</th>
 						  <th style="text-align:center" width="5$">Gan.</th>
@@ -134,7 +132,6 @@
 					<tbody>	
 						 {% for linea in tabla %}
 						  <tr>
-						  	<td><b>{{ linea.id }}</b></td>
 							<td><b>{{ linea.nombre }}</b></td>
 							<td>{{ linea.puntaje  }}</td>
 							<td>{{ linea.par_ganados +  linea.par_perdidos + linea.par_empatados }}</td>
