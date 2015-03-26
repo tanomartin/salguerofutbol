@@ -61,6 +61,11 @@ License URL: http://creativecommons.org/licenses/by/3.0/
   ga('send', 'pageview');
 
 </script>
+
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="css/bootstrap-theme.min.css">
+<script src="js/bootstrap.min.js"></script>
+
 </head>
 <body>
 <div class="menu">
@@ -70,30 +75,46 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     <li class="active grid"><a class="color5" href="torneos.html">torneoS</a></li>
     <li class="active grid"><a class="color9" href="servicios.html">SERVICIOS</a></li>
     <li class="active grid"><a class="color4" href="contacto.html">CONTACTO</a></li>
-    <div class="clearfix"> </div>
   </ul>
 </div>
+
 <img src="images/headergenerico.jpg" class="img-responsive" alt=""/>
+
+{% include 'navbar.html' %}
+
 <div class="clearfix">
   <div class="copy">
-    <ul>
-      <a href="mainestadisticas.html">TORNEO F9 </a>
-    </ul>
-    <a href="estadisticasf9posiciones.html"> | Tabla de posiciones | </a> <a href="estadisticasf9goleadores.php"> |  Goleadores | </a> <a href="estadisticasf9ultimafecha.html"> |  Resultados ultima fecha  | </a> <a href="estadisticasf9playoff.html"> | Play Off 2014 | </a> <a href="estadisticasf9supercopa.html"> |  Super Copa  | </a> <a href="estadisticasf9proximafecha.html"> |  Horarios proxima fecha  | </a> <img src="images/supercopa2014.jpg" /> </div>
+  		<h3> Expulsados </h3>
+		  {% if expulsados|length > 0 %}
+			<table border="1" cellpadding="0" cellspacing="0" width="740" align="center">
+			  <thead>
+				<tr> 
+				  <th style="text-align:center">Nombre</th>
+				  <th style="text-align:center">Equipo</th>
+				  <th style="text-align:center">Sancion</th>
+				</tr>
+			  </thead>
+			  <tbody>
+			  {% for expulsado in expulsados %}
+			  <tr>
+				<td>{{ expulsado.nombre }}</td>
+				<td>{{ expulsado.equipo }}</td>
+				<td>{{ expulsado.sancion }}</td>
+			  </tr>
+			  {% endfor %}
+			  </tbody>
+			</table>
+		  {% endif %} 
+  </div>
 </div>
 <div class="footer">
   <div class="container">
     <ul class="social">
       <li><a href="http://instagram.com/salguerofutbol"> <i class="instagram"> </i> </a></li>
-      <li><a href=
-            
-            "http://facebook.com/salguerofutbol"><i class="fb"> </i> </a></li>
+      <li><a href="http://facebook.com/salguerofutbol"><i class="fb"> </i> </a></li>
       <li><a href="http://twitter.com/salguerofutbol"><i class="tw"> </i> </a></li>
     </ul>
-    <div class="clearfix"> </div>
-    <div class="copy">
-      <p>&copy; Powered by <a href="http://noova.com.ar" target="_blank">Noova</a> </p>
-    </div>
+    <div class="copy"><p>&copy; Powered by <a href="http://noova.com.ar" target="_blank">Noova</a> </p></div>
   </div>
 </div>
 </body>

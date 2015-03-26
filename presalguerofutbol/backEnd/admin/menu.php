@@ -73,7 +73,10 @@
         </li>   
 		<li>
 	      <a href="#" title="Goleadores" class="first"  onclick="this.blur(); ir('Goleadores', '', 'goleadores.php', 'goleadores.php')">Goleadores</a>
-        </li>       
+        </li>    
+		<li>
+	      <a href="#" title="Goleadores" class="first"  onclick="this.blur(); ir('Expulsados', '', 'expulsados.php', 'expulsados.php')">Expulsados</a>
+        </li>    
       </ul>
     </li> 
 	
