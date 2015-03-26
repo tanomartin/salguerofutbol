@@ -97,16 +97,37 @@ class Fechas {
 		return $res;
 	}
 	
-	//function getFechaActual($id="",$orden="") {
-	//	$aFechas = $this -> getIdTorneoCat($id,$orden);
-		/*$hoy = date('Y-m-d');
-		/*for ($i=0; $i<count($aFechas);$i++){ 
-			if( $aFechas[$i][fechaFin]>= $hoy)
-				 return $i+1;			
-		}*/
-		//return $i+1;
-	//	return count($aFechas);
-	//}
+	function getFechaProxima($id="") {
+		$db = new Db();
+		$hoy = date('Y-m-d');
+		$query = "Select f.*, tz.id_torneo, tz.id_zona, tz.id as idTorneoZona, t.nombre as torneo, z.nombreCorto as zona
+				  from fechas f, torneos t, torneos_zonas tz, zonas z
+				  where f.idTorneoZona = tz.id and tz.id_torneo = t.id and tz.id_zona = z.id" ;
+		if ($id != "") {
+			$query .= " and e.idTorneoZona = '$id'";
+		}
+		$order = " order by e.fechaFin > '$hoy' ";
+		print($query);
+		$res = $db->getResults($query, ARRAY_A); 
+		$db->close();
+		return $res;
+	}
+	
+	function getFechaUltima($id="",$orden="") {
+		$db = new Db();
+		$hoy = date('Y-m-d');
+		$query = "Select f.*, tz.id_torneo, tz.id_zona, tz.id as idTorneoZona, t.nombre as torneo, z.nombreCorto as zona
+				  from fechas f, torneos t, torneos_zonas tz, zonas z
+				  where f.idTorneoZona = tz.id and tz.id_torneo = t.id and tz.id_zona = z.id" ;
+		if ($id != "") {
+			$query .= " and e.idTorneoZona = '$id'";
+		}
+		$order = " order by e.fechaFin <= '$hoy' ";
+		print($query);
+		$res = $db->getResults($query, ARRAY_A); 
+		$db->close();
+		return $res;
+	}
 
 	function getPaginado($filtros, $inicio, $cant, &$total) {
 		$orden = ($filtros["filter_order"])?$filtros["filter_order"]:"e.id";

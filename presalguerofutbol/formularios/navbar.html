@@ -1,0 +1,45 @@
+{% block barraNavegacion %}
+<div class="clearfix">
+  <div class="navbar navbar-default" role="navigation">
+     <div class="navbar-header"><a class="navbar-brand" href="mainestadisticas.php">Torneos</a></div>
+		 <ul class="nav navbar-nav navbar-left">
+			{% for torneozona in torneosZonas %} 
+				{% if torneozona.torneo.id == idTorneoActivo %} 
+					<li class="dropdown; active"> 
+				{% else %} 
+					<li class="dropdown">
+				{% endif %} 
+						<a class="dropdown-toggle" data-toggle="dropdown" href="#">{{ torneozona.torneo.nombre }} <span class="caret"></span></a>
+						<ul class="dropdown-menu  multi-level">
+							  <li class="dropdown-submenu">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown">Tabla de posiciones </a>
+									<ul class="dropdown-menu">
+										{% for torenoZona in torneozona.zonas %} 
+											<li><a href="estadisticasPosiciones.php?idTorneoZonaActiva={{ torenoZona.id }}&idZonaActiva={{ torenoZona.id_zona }}&idTorneoActivo={{ torneozona.torneo.id }}"> {{ torenoZona.nombreCorto }} </a></li>
+										{% endfor %}
+									</ul>
+							  </li>
+							  <li> <a href="estadisticasGoleadores.php?idTorneoActivo={{ torneozona.torneo.id }}"> Goleadores </a> </li>
+							  <li class="dropdown-submenu">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown">Resultados ultima fecha </a>
+									<ul class="dropdown-menu">
+										{% for torenoZona in torneozona.zonas %} 
+											<li><a href="estadisticasProximafecha.php?idTorneoZonaActiva={{ torenoZona.id }}&idZonaActiva={{ torenoZona.id_zona }}&idTorneoActivo={{ torneozona.torneo.id }}"> {{ torenoZona.nombreCorto }} </a></li>
+										{% endfor %}
+									</ul>
+							  </li>
+							   <li class="dropdown-submenu">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown">Horarios proxima fecha </a>
+									<ul class="dropdown-menu">
+										{% for torenoZona in torneozona.zonas %} 
+											<li><a href="estadisticasUltimafecha.php?idTorneoZonaActiva={{ torenoZona.id }}&idZonaActiva={{ torenoZona.id_zona }}&idTorneoActivo={{ torneozona.torneo.id }}"> {{ torenoZona.nombreCorto }} </a></li>
+										{% endfor %}
+									</ul>
+							  </li>
+						</ul>
+				 	</li>
+			 {% endfor %}
+		</ul>
+ </div>
+</div>
+{% endblock %}
