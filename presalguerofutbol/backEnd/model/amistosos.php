@@ -23,7 +23,6 @@ class Amistosos {
 			$this->horaPartido = $valores[0]["horaPartido"];
 			$this->idSede = $valores[0]["idSede"];
 			$this->cancha = $valores[0]["cancha"]; 
-			$this->suspendido = ($valores[0]["suspendido"]=='on')?1:0; 
 		}
 	}
 
@@ -36,7 +35,6 @@ class Amistosos {
 		$this->horaPartido = $valores["horaPartido"];
 		$this->idSede = $valores["idSede"];
 		$this->cancha = $valores["cancha"];
-		$this->suspendido = ($valores["suspendido"]=='on')?1:0; 
 	}
 	
 	function _setById($id) {
@@ -56,8 +54,7 @@ class Amistosos {
 				"'".$this->idSede."',".
 				"'".$this->cancha."',".				
 				"'".$this->golesEquipo1."',".
-				"'".$this->golesEquipo2."',".
-				"'".$this->suspendido."')";
+				"'".$this->golesEquipo2."')";
 		$this->id = $db->query($query); 
 		$db->close();
 	}
@@ -79,8 +76,7 @@ class Amistosos {
 		          idSede = '". $this->idSede."',
 		          cancha = '". $this->cancha."',
 		          golesEquipo1 = '". $this->golesEquipo1."',
-		          golesEquipo2 = '". $this->golesEquipo2."',
-		          suspendido = '". $this->suspendido."'
+		          golesEquipo2 = '". $this->golesEquipo2."'
 				  where id = ".$this->id ;
 		$db->query($query); 
 		$db->close();

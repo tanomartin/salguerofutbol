@@ -2,7 +2,6 @@
 	include_once "../model/amistosos.php";
 	include_once "../model/equipos.php";	
 	include_once "../model/sedes.php";	
-	include_once "../model/fckeditor.class.php" ;
 	include_once "include/control_session.php";
 	
 	$operacion = "Alta";
@@ -13,15 +12,8 @@
 	
 	}
 
-    $oFCKeditor = new FCKeditor( "texto" ) ;
-    $oFCKeditor -> BasePath = '../_js/FCKeditor/' ;
-	$oFCKeditor -> Height = 250 ;
-	$oFCKeditor -> Width = 450 ;
-	$oFCKeditor -> ToolbarSet = "custom2" ;
-    $oFCKeditor -> InstanceName = "observaciones" ;
-    $oFCKeditor -> Value = $datos[0]['observaciones'] ;
+
 	$disabled = "";
-	
 	if( $_POST['accion'] == 'ver')
 		$disabled = "disabled";
 
@@ -157,15 +149,6 @@
                                 ?>
                           </select>
                           <span id="advice4"> </span> </span> </td>
-                      </tr>
-                      <tr class="even">
-                        <td class="col_0 col_first"><label for="nombre">Suspendido</label></td>
-                        <td class="col_1 col_last"><input name="suspendido" id="suspendido" type="checkbox" <?= $disabled ?> <? if ($datos[0]['suspendido'] == 1 ){?> checked="checked" <? } ?>>
-                          Si</td>
-                      </tr>
-                      <tr class="odd">
-                        <td class="col_0 col_first"><label for="nombre">Descripción</label></td>
-                        <td class="col_1 col_last"><?= $oFCKeditor -> Create( ) ; ?></td>
                       </tr>
                     </tbody>
                   </table>

@@ -1,5 +1,4 @@
 <?	include_once "include/config.inc.php";
-	include_once "include/fechas.php";
 	include_once "../model/amistosos.php";
 	include_once "include/control_session.php";
 
