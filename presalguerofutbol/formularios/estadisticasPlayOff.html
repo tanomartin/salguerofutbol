@@ -61,6 +61,11 @@ License URL: http://creativecommons.org/licenses/by/3.0/
   ga('send', 'pageview');
 
 </script>
+
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="css/bootstrap-theme.min.css">
+<script src="js/bootstrap.min.js"></script>
+
 </head>
 <body>
 <div class="menu">
@@ -74,20 +79,23 @@ License URL: http://creativecommons.org/licenses/by/3.0/
   </ul>
 </div>
 <img src="images/headergenerico.jpg" class="img-responsive" alt=""/>
-<div class="clearfix">
-  <div class="copy">
-    <ul>
-      <a href="mainestadisticas.html">TORNEO F9 </a>
-    </ul>
-    <a href="estadisticasf9posiciones.html"> | Tabla de posiciones | </a> <a href="estadisticasf9goleadores.php"> |  Goleadores | </a> <a href="estadisticasf9ultimafecha.html"> |  Resultados ultima fecha  | </a> <a href="estadisticasf9playoff.html"> | Play Off 2014 | </a> <a href="estadisticasf9supercopa.html"> |  Super Copa  | </a> <a href="estadisticasf9proximafecha.html"> |  Horarios proxima fecha  | </a> <img src="images/playoffsabado_02_12_2014.jpg" /> </div>
+
+{% include 'navbar.html' %}
+<div class="clearfix"> 
+	<div class="copy">
+		{% if imagen != 'NULL' %}
+			<center> <img src="{{ imagen }}" class="img-responsive" alt="" /> </center>
+		{% else %}
+			<h3> No Se Cargo El Play Off </h3>
+		{% endif %}
+	</div>
 </div>
+
 <div class="footer">
   <div class="container">
     <ul class="social">
       <li><a href="http://instagram.com/salguerofutbol"> <i class="instagram"> </i> </a></li>
-      <li><a href=
-            
-            "http://facebook.com/salguerofutbol"><i class="fb"> </i> </a></li>
+      <li><a href="http://facebook.com/salguerofutbol"><i class="fb"> </i> </a></li>
       <li><a href="http://twitter.com/salguerofutbol"><i class="tw"> </i> </a></li>
     </ul>
     <div class="clearfix"> </div>
