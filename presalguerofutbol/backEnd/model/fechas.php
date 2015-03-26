@@ -102,12 +102,10 @@ class Fechas {
 		$hoy = date('Y-m-d');
 		$query = "Select f.*, tz.id_torneo, tz.id_zona, tz.id as idTorneoZona, t.nombre as torneo, z.nombreCorto as zona
 				  from fechas f, torneos t, torneos_zonas tz, zonas z
-				  where f.idTorneoZona = tz.id and tz.id_torneo = t.id and tz.id_zona = z.id" ;
+				  where f.idTorneoZona = tz.id and tz.id_torneo = t.id and tz.id_zona = z.id and f.fechaFin > '$hoy'";
 		if ($id != "") {
-			$query .= " and e.idTorneoZona = '$id'";
+			$query .= " and f.idTorneoZona = '$id'";
 		}
-		$order = " order by e.fechaFin > '$hoy' ";
-		print($query);
 		$res = $db->getResults($query, ARRAY_A); 
 		$db->close();
 		return $res;
@@ -118,12 +116,10 @@ class Fechas {
 		$hoy = date('Y-m-d');
 		$query = "Select f.*, tz.id_torneo, tz.id_zona, tz.id as idTorneoZona, t.nombre as torneo, z.nombreCorto as zona
 				  from fechas f, torneos t, torneos_zonas tz, zonas z
-				  where f.idTorneoZona = tz.id and tz.id_torneo = t.id and tz.id_zona = z.id" ;
+				  where f.idTorneoZona = tz.id and tz.id_torneo = t.id and tz.id_zona = z.id and f.fechaFin <= '$hoy'" ;
 		if ($id != "") {
-			$query .= " and e.idTorneoZona = '$id'";
+			$query .= " and f.idTorneoZona = '$id'";
 		}
-		$order = " order by e.fechaFin <= '$hoy' ";
-		print($query);
 		$res = $db->getResults($query, ARRAY_A); 
 		$db->close();
 		return $res;

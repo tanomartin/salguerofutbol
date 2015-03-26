@@ -61,40 +61,74 @@ License URL: http://creativecommons.org/licenses/by/3.0/
   ga('send', 'pageview');
 
 </script>
+
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="css/bootstrap-theme.min.css">
+<script src="js/bootstrap.min.js"></script>
+
 </head>
 <body>
-<div class="menu">
-  <ul class="megamenu skyblue">
-    <li class="active grid"><a class="color1" href="alquilerdecanchas.html">ALQUILER DE CANCHAS</a></li>
-    <li class="active grid"><a class="color10" href="sedes.html">SEDES</a></li>
-    <li class="active grid"><a class="color5" href="torneos.html">torneoS</a></li>
-    <li class="active grid"><a class="color9" href="servicios.html">SERVICIOS</a></li>
-    <li class="active grid"><a class="color4" href="contacto.html">CONTACTO</a></li>
-    <div class="clearfix"> </div>
-  </ul>
-</div>
-<img src="images/headergenerico.jpg" class="img-responsive" alt=""/>
-<div class="clearfix">
-  <div class="copy">
-    <ul>
-      <a href="mainestadisticas.html">TORNEO F9 </a>
-    </ul>
-    <a href="estadisticasf9posiciones.html"> | Tabla de posiciones | </a> <a href="estadisticasf9goleadores.php"> |  Goleadores | </a> <a href="estadisticasf9ultimafecha.html"> |  Resultados ultima fecha  | </a> <a href="estadisticasf9playoff.html"> | Play Off 2014 | </a> <a href="estadisticasf9supercopa.html"> |  Super Copa  | </a> <a href="estadisticasf9proximafecha.html"> |  Horarios proxima fecha  | </a> <img src="images/proximafecha.jpg" > </div>
-</div>
-<div class="footer">
-  <div class="container">
-    <ul class="social">
-      <li><a href="http://instagram.com/salguerofutbol"> <i class="instagram"> </i> </a></li>
-      <li><a href=
-            
-            "http://facebook.com/salguerofutbol"><i class="fb"> </i> </a></li>
-      <li><a href="http://twitter.com/salguerofutbol"><i class="tw"> </i> </a></li>
-    </ul>
-    <div class="clearfix"> </div>
-    <div class="copy">
-      <p>&copy; Powered by <a href="http://noova.com.ar" target="_blank">Noova</a> </p>
-    </div>
-  </div>
-</div>
+	<div class="menu">
+	  <ul class="megamenu skyblue">
+		<li class="active grid"><a class="color1" href="alquilerdecanchas.html">ALQUILER DE CANCHAS</a></li>
+		<li class="active grid"><a class="color10" href="sedes.html">SEDES</a></li>
+		<li class="active grid"><a class="color5" href="torneos.html">torneoS</a></li>
+		<li class="active grid"><a class="color9" href="servicios.html">SERVICIOS</a></li>
+		<li class="active grid"><a class="color4" href="contacto.html">CONTACTO</a></li>
+		<div class="clearfix"> </div>
+	  </ul>
+	</div>
+	<img src="images/headergenerico.jpg" class="img-responsive" alt=""/>
+	
+	{% include 'navbar.html' %}
+	
+	<div class="clearfix">
+	  <div class="copy">
+			<h2> {{ zona.nombreCorto }}</h2>
+			<h4> {{ zona.nombreLargo }}</h4>
+			<h5> {{ zona.nombrePagina }}</h5>
+			<h3> Proximos Horarios "{{ fecha.nombre }}"</h3>
+			  {% if partidos|length > 0 %}
+				<table border="1" cellpadding="0" cellspacing="0" width="800" align="center">
+				  <thead>
+					<tr> 
+					  <th style="text-align:center">Dia</th>
+					  <th style="text-align:center">Hora</th>
+					  <th style="text-align:center">Sede</th>
+					  <th style="text-align:center">Cancha</th>
+					  <th style="text-align:center">Local</th>
+					  <th style="text-align:center">Visitante</th>
+					</tr>
+				  </thead>
+				  <tbody>
+				  {% for partido in partidos %}
+				  <tr>
+				  	<td>{{ partido.fechaPartidoFormato }}</td>
+					<td>{{ partido.horaPartido }}</td>
+					<td>{{ partido.sede }}</td>
+					<td>{{ partido.cancha }}</td>
+					<td>{{ partido.equipo1 }}</td>
+					<td>{{ partido.equipo2 }}</td>
+				  </tr>
+				  {% endfor %}
+				  </tbody>
+				</table>
+			  {% endif %} 
+	  </div>
+	</div>
+	
+	<div class="footer">
+	  <div class="container">
+		<ul class="social">
+		  <li><a href="http://instagram.com/salguerofutbol"> <i class="instagram"> </i> </a></li>
+		  <li><a href="http://facebook.com/salguerofutbol"><i class="fb"> </i> </a></li>
+		  <li><a href="http://twitter.com/salguerofutbol"><i class="tw"> </i> </a></li>
+		</ul>
+		<div class="clearfix"> </div>
+		<div class="copy">
+		  <p>&copy; Powered by <a href="http://noova.com.ar" target="_blank">Noova</a> </p>
+		</div>
+	  </div>
+	</div>
 </body>
 </html>

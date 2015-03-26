@@ -171,14 +171,14 @@ class Fixture {
 	
 	function getByFecha($fecha){
 		$db = new Db();
-        $query = "Select  x.*, e1.nombre as equipo1,e2.nombre as equipo2, s.nombre as sede, f.nombre as nombreFecha
+        $query = "Select  x.*, DATE_FORMAT(x.fechaPartido, '%d/%m/%Y') as fechaPartidoFormato, e1.nombre as equipo1,e2.nombre as equipo2, s.nombre as sede, f.nombre as nombreFecha
 		          from partidos x, fechas f, sedes s, equipos e1, equipos e2 
 				  where x.idFecha = f.id and
 				  x.idSede = s.id and
 				  x.idEquipo1 = e1.id and
 				  x.idEquipo2 = e2.id
 				  and f.id=".$fecha;
-		$query.= " order by  fechaPartido";
+		$query.= " order by fechaPartido ASC, horaPartido ASC";
 		$datos = $db->getResults($query, ARRAY_A); 
 		$db->close();
 		return $datos;	
