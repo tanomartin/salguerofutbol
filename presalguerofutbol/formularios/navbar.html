@@ -41,6 +41,13 @@
 						</ul>
 				 	</li>
 			 {% endfor %}
+			 {% if idTorneoActivo == -1 %} 
+				<li class="active"> 
+			 {% else %} 
+				<li>
+			 {% endif %} 
+				<a href="estadisticasAmistosos.php?idTorneoActivo=-1">Amistosos</a>
+			</li>
 		</ul>
  </div>
 </div>

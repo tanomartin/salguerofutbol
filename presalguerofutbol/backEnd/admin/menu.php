@@ -70,6 +70,9 @@
 	  <ul style="visibility: visible; opacity: 1;" class="level_2">
 	    <li class="first">
 	      <a href="#" title="Partidos"  class="first"  onclick="this.blur(); ir('Fixture', '', 'fixture.php', 'fixture.php')">Partidos</a>
+        </li> 
+		 <li>
+	      <a href="#" title="Partidos"  class="first"  onclick="this.blur(); ir('Amistosos', '', 'amistosos.php', 'amistosos.php')">Amistosos</a>
         </li>   
 		<li>
 	      <a href="#" title="Goleadores" class="first"  onclick="this.blur(); ir('Goleadores', '', 'goleadores.php', 'goleadores.php')">Goleadores</a>

@@ -127,13 +127,22 @@ class Equipos {
 		return $res;
 	}
 
-
 	function getById($id="") {
 		$db = new Db();
 		$query = "Select e.*
 				  from equipos e
 				  where e.id =  '$id'";
 		$res = $db->getRow($query); 
+		$db->close();
+		return $res;
+	}
+	
+	function getEquiposSinTorneo($id="") {
+		$db = new Db();
+		$query = "Select e.*
+				  from equipos e
+				  where e.id <> '$id'";
+		$res = $db->getResults($query, ARRAY_A); 
 		$db->close();
 		return $res;
 	}
