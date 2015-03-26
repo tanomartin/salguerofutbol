@@ -17,7 +17,7 @@ if ($torneos != NULL) {
 }
 
 $torneoActivo = $oObj->get($_GET['idTorneoActivo']);
-$nombreArchivo = "images/playOff".$torneoActivo[0]['nombre'].".jpg";
+$nombreArchivo = "images/playoff".$torneoActivo[0]['nombre'].".jpg";
 
 if (!file_exists ($nombreArchivo)) {
 	$nombreArchivo = "NULL";
