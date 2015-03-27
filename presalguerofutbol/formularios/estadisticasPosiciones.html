@@ -77,33 +77,29 @@
 	<h5> {{ zona.nombrePagina }}</h5>
 	<h3> Posiciones </h3>
 		{% if tabla != null %}
-				<table border="1" cellpadding="0" cellspacing="0" width="900" align="center">
+				<table border="1" cellpadding="0" cellspacing="0" width="700" align="center">
 					<thead>
 						<tr> 
-						  <th style="text-align:center" width="5%"></th>
-						  <th style="text-align:center" width="35%">Equipo</th>
-						  <th style="text-align:center" width="5%">Pts.</th>
-						  <th style="text-align:center" width="5%">Jug.</th>
-						  <th style="text-align:center" width="5$">Gan.</th>
-						  <th style="text-align:center" width="5%">Emp.</th>
-						  <th style="text-align:center" width="5%">Per.</th>
-						  <th style="text-align:center" width="5%">GF</th>
-						  <th style="text-align:center" width="5%">GC</th>
-						  <th style="text-align:center" width="5%">Dif.</th>
-						  <th style="text-align:center" width="5%">No G.</th>
-						  <th style="text-align:center" width="5%">No E.</th>
-						  <th style="text-align:center" width="5%">No P.</th>
-						  <th style="text-align:center" width="5%">Marca</th>
-						  <th style="text-align:center" width="5%">Encaja</th>
+						  <th style="text-align:center" width="4%"></th>
+						  <th style="text-align:center" width="40%">Equipo</th>
+						  <th style="text-align:center" width="7%">Pts.</th>
+						  <th style="text-align:center" width="7%">Jug.</th>
+						  <th style="text-align:center" width="7$">Gan.</th>
+						  <th style="text-align:center" width="7%">Emp.</th>
+						  <th style="text-align:center" width="7%">Per.</th>
+						  <th style="text-align:center" width="7%">GF</th>
+						  <th style="text-align:center" width="7%">GC</th>
+						  <th style="text-align:center" width="7%">Dif.</th>
 						</tr>
 					</thead>
 					<tbody>	
 						 {% set contador = 1 %}
+						 {% set observ = 0 %}
 						 {% for linea in tabla %}
 						  <tr>
 						  	<td><b>{{ contador }}</b></td>
 							{% set contador = contador + 1 %}
-							<td><b>{{ linea.nombre }}</b></td>
+							<td><b>{{ linea.nombre }} {% if linea.descripcion != '' %} {% set observ = 1 %}<font color="#FF0000" size="+1"> * </font> {% endif %} </b></td>
 							<td>{{ linea.puntaje  }}</td>
 							<td>{{ linea.par_ganados +  linea.par_perdidos + linea.par_empatados }}</td>
 							<td>{{ linea.par_ganados }}</td>
@@ -112,15 +108,35 @@
 							<td>{{ linea.goles_favor }}</td>
 							<td>{{ linea.goles_contra }}</td>
 							<td>{{ linea.goles_favor - linea.goles_contra }}</td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
 						  </tr>
 				  		{% endfor %}
 					</tbody>
 				</table>
+				{% if observ == 1 %}
+					<h3> Observaciones </h3>
+					<table border="1" cellpadding="0" cellspacing="0" width="700" align="center">
+						<thead>
+							<tr> 
+							  <th style="text-align:center" width="4%"></th>
+							  <th style="text-align:center" width="40%">Equipo</th>
+							  <th style="text-align:center" width="56%">Observacion</th>
+							</tr>
+						</thead>
+						<tbody>	
+							 {% set contador = 1 %}
+							 {% for linea in tabla %}
+								 {% if linea.descripcion != '' %}
+								  <tr>
+									<td><b>{{ contador }}</b></td>
+									<td><b>{{ linea.nombre }} <font color="#FF0000" size="+1"> * </font> </b></td>
+									<td>{{ linea.descripcion  }}</td>
+								  </tr>
+								  {% endif %}
+								  {% set contador = contador + 1 %}
+							{% endfor %}
+						</tbody>
+					</table>
+				{% endif %} 
 		{% endif %} 
 	</div>
 </div>
@@ -129,7 +145,7 @@
  <div class="copy">
 	<h3> Cruces </h3>
  		{% if equipos != null %}
- 			<table border="1" cellpadding="0" cellspacing="0" width="900" align="center">
+ 			<table border="1" cellpadding="0" cellspacing="0" width="700" align="center">
 			   <thead>
 			    <tr>
 					<th style="text-align:center" width="5%"></td>

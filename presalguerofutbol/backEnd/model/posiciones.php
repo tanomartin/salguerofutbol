@@ -26,9 +26,10 @@ class Posiciones {
 				$aEquipoR[$valor['id']]['par_ganados'] = 0;
 				$aEquipoR[$valor['id']]['par_perdidos'] = 0;
 				$aEquipoR[$valor['id']]['par_empatados'] = 0;
-				$aEquipoR[$valor['id']]['puntaje'] = 0;
+				$aEquipoR[$valor['id']]['puntaje'] = -$valor['descuento_puntos'];
 				$aEquipoR[$valor['id']]['goles_favor'] = 0;
 				$aEquipoR[$valor['id']]['goles_contra'] = 0;
+				$aEquipoR[$valor['id']]['descripcion'] = $valor['descripcion'];
 			}
 			for ($i=0;$i<count($aFixture);$i++){
 				$aEquipoR[$aFixture[$i][idEquipo1]]['goles_favor'] +=$aFixture[$i][golesEquipo1];
