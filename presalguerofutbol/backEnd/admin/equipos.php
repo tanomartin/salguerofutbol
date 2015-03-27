@@ -224,7 +224,7 @@
                     <td align="left"><?=$datos[$i]["nombre"]?></td>
                     <td align="left"><?=$datos[$i]["torneo"]?></td>
                     <td align="left"><?=$datos[$i]["zona"]?></td>
-                    <td nowrap><a href="javascript:ver(<?=$datos[$i]["id"]?>);"></a> <a href="javascript:editar(<?=$datos[$i]["id"]?>);"> <img border="0" src="images/icono-editar.gif" alt="editar" title="editar" /></a> <a href="javascript:borrar(<?=$datos[$i]["id"]?>);"><img border="0" src="images/icono-eliminar.gif" alt="eliminar" title="eliminar" /></a> <a href="javascript:password(<?=$datos[$i]["id"]?>);"></a>
+                    <td nowrap><a href="javascript:ver(<?=$datos[$i]["id"]?>);"></a> <a href="javascript:editar(<?=$datos[$i]["id"]?>);"> <img border="0" src="images/icono-editar.gif" alt="editar" title="editar" /></a><a href="javascript:ver(<?=$datos[$i]["id"]?>);"><img border="0" src="images/find-icon.png" alt="ver" title="ver" width="20px" height="20px" /></a> <a href="javascript:borrar(<?=$datos[$i]["id"]?>);"><img border="0" src="images/icono-eliminar.gif" alt="eliminar" title="eliminar" /></a> <a href="javascript:password(<?=$datos[$i]["id"]?>);"></a>
                       <!--	<a href="javascript:idioma(<?=$datos[$i]["id"]?>);"> <img border="0" src="images/idioma.jpg" alt="idioma" title="idioma"  width="20" height="20"/></a>--></td>
                   </tr>
                   <? } }?>

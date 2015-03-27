@@ -7,8 +7,9 @@ class Equipos {
 	var $id;
 	var $nombre;
 	var $idTorneoCat;
+	var $descuento_puntos;
 	var $descripcion;
-	var $email;
+	var $foto;
 		
 	function Equipos($id="") {
 		if ($id != "") {
@@ -16,6 +17,9 @@ class Equipos {
 			$this->id = $valores[0]["id"]; 
 			$this->nombre = $valores[0]["nombre"];			
 			$this->idTorneoCat = $valores[0]["idTorneoCat"];
+			$this->descuento_puntos = $valores[0]["descuento_puntos"]; 
+			$this->descripcion = $valores[0]["descripcion"];
+			$this->foto = $valores[0]["fotoPreview"]; 
 		}
 	}
 
@@ -24,6 +28,9 @@ class Equipos {
 		$this->id = $valores["id"]; 
 		$this->nombre = $valores["nombre"];			
 		$this->idTorneoCat = $valores["idTorneoCat"];
+		$this->descuento_puntos = ($valores["descuento_puntos"])?$valores["descuento_puntos"]:0; 
+		$this->descripcion = $valores["descripcion"];
+		$this->foto = $valores["fotoGrande"];
 	}
 	
 	function _setById($id) {
@@ -33,10 +40,23 @@ class Equipos {
 
 	function insertar() {
 		$db = new Db();
-		$query = "insert into equipos(idTorneoZona,nombre) values (".
+		$query = "insert into equipos(idTorneoZona,nombre,descuento_puntos,descripcion) values (".
 				"'".$this->idTorneoCat."',".
-				"'".$this->nombre."')";	  
-		$db->query($query); 
+				"'".$this->nombre."',".				
+				"'".$this->descuento_puntos."',".				
+				"'".$this->descripcion."')";  
+		print($query);
+		$this->id = $db->query($query); 
+		if(is_uploaded_file($_FILES['foto']['tmp_name'])) {
+			$path_parts = pathinfo($_FILES["foto"]["name"]);
+			$extension = $path_parts['extension'];
+			$name = "foto_".$this->id."_".time().".".$extension;
+			$ruta= "../fotos_equipos/".$name;
+			$query = "update equipos set foto = '". $name."'
+					  where id = ".$this->id ;
+			$db->query($query); 
+			print($query);
+		}
 		$db->close();
 	}
 
@@ -51,9 +71,22 @@ class Equipos {
 		$db = new Db();
 		$query = "update equipos set 
 		          nombre = '". $this->nombre."',		
-		          idTorneoZona = '". $this->idTorneoCat."'
-				  where id = ".$this->id ; 
+		          idTorneoZona = '". $this->idTorneoCat."',
+		          descuento_puntos = '". $this->descuento_puntos."',
+		          descripcion = '". $this->descripcion."'
+				  where id = ".$this->id ;  
 		$db->query($query); 
+		if(is_uploaded_file($_FILES['foto']['tmp_name'])) {
+			$path_parts = pathinfo($_FILES["foto"]["name"]);
+			$extension = $path_parts['extension'];
+			$name = "foto_".$this->id."_".time().".".$extension;
+			$ruta= "../fotos_equipos/".$name;
+			if (move_uploaded_file($_FILES['foto']['tmp_name'], $ruta)) {
+				$query = "update equipos set  foto = '". $name."'
+					  where id = ".$this->id ;
+				$db->query($query);
+			}
+		}
 		$db->close();
 	}
 	
