@@ -1,5 +1,5 @@
 <?	include_once "include/config.inc.php";
-	include_once "../model/sedes.php";
+	include_once "../model/torneos.php";
 	include_once "../model/equipos.php";
 	include_once "include/control_session.php";
 	
@@ -10,6 +10,9 @@
 		$oGoleador= new Goleadores();
 		$datos = $oGoleador->get($_POST["id"]);
 	}
+	
+	$oTorneo= new Torneos();
+	$aTorneos = $oTorneo->get();
 	
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -65,7 +68,19 @@
                   <fieldset>
                   <legend>Datos del Goleador </legend>
                   <table summary="Personal data" cellpadding="0" cellspacing="0">
+                    <tr class="odd">
+                      <td class="col_0 col_first"><label for="nombre">Torneo</label>
+                          <span class="mandatory">*</span></td>
+                      <td class="col_1 col_last">
+					  	<select name="idTorneo" id="idTorneo" <?= $disabled ?> class="validate-selection" onchange="clearEquipo1('idEquipo'); return listOnChange('idTorneo', '','Equipo1List','equiposGoleadores_data.php','advice3','idEquipo','idEquipo');" >
+                          <option value="-1">Seleccione un Torneo...</option>
+                          <?php for($i=0;$i<count($aTorneos);$i++) { ?>
+                          <option value="<?php echo $aTorneos[$i]['id'] ?>" <?php if ($datos[0]["idTorneo"] ==   $aTorneos[$i]['id'] ) echo "selected"; ?>><?php echo $aTorneos[$i]['nombre'] ?> </option>
+                          <?php } ?>
+                        </select>                      </td>
+                    </tr>
                     <tbody>
+                      
                       <tr class="even">
                         <td class="col_0 col_first"><label for="id_opcion">Nombre</label>
                           <span class="mandatory">*</span></td>
@@ -77,7 +92,8 @@
                         <td class="col_1 col_last"><span id="Equipo1List">
                           <?
 							$oEquipos = new Equipos();
-							$aEquipos = $oEquipos->get();?>
+							$aEquipos = $oEquipos->getByIdTorneo($datos[0]["idTorneo"]);
+							?>
 						  <select name="idEquipo" id="idEquipo" <?= $disabled ?> class="validate-selection" >
                             <option value="-1">Seleccione un Equipo...</option>
                         <?

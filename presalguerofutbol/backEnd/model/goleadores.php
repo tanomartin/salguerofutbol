@@ -6,6 +6,7 @@ class Goleadores {
 	var $id;
 	var $nombre;
 	var $idEquipo;
+	var $idTorneo;
 	var $goles;
 	
 	function Goleadores($id="") {
@@ -14,6 +15,7 @@ class Goleadores {
 			$this->id = $goleadores[0]["id"]; 
 			$this->nombre = $goleadores[0]["nombre"];
 			$this->idEquipo = $goleadores[0]["idEquipo"];
+			$this->idTorneo = $goleadores[0]["idTorneo"];
 			$this->goles = $goleadores[0]["goles"];
 		}
 	}
@@ -22,6 +24,7 @@ class Goleadores {
 		$this->id = $valores["id"]; 
 		$this->nombre = $valores["nombre"];
 		$this->idEquipo = $valores["idEquipo"];
+		$this->idTorneo = $valores["idTorneo"];
 		$this->goles = $valores["goles"];
 	}
 	
@@ -42,9 +45,18 @@ class Goleadores {
 		return $res;
 	}
 	
+	function getByTorneo($idTorneo="") {
+		$db = new Db();
+		$query = "Select c.*, e.nombre as equipo, t.nombre as torneo from goleadores c, equipos e, torneos t where c.idTorneo = $idTorneo and c.idEquipo = e.id and c.idTorneo = t.id" ;
+		$query .= " order by goles DESC";
+		$res = $db->getResults($query, ARRAY_A); 
+		$db->close();
+		return $res;
+	}
+	
 	function agregar() {
 		$db = new Db();	
-		$query = "insert into goleadores(nombre, idEquipo, goles) values ('".$this->nombre."','".$this->idEquipo."','".$this->goles."')" ;
+		$query = "insert into goleadores(nombre, idEquipo, idTorneo, goles) values ('".$this->nombre."','".$this->idEquipo."','".$this->idTorneo."','".$this->goles."')" ;
 		$db->query($query); 
 		$db->close();	
 	}
@@ -61,6 +73,7 @@ class Goleadores {
 		$query = "update goleadores set 
 		          nombre  = '". $this->nombre."',
 				  idEquipo  = '". $this->idEquipo."',
+				  idTorneo  = '". $this->idTorneo."',
 				  goles  = '". $this->goles."'
 				  where id = ".$this->id ;
 		$db->query($query); 
@@ -69,9 +82,13 @@ class Goleadores {
 	
 	function getPaginado($filtros, $inicio, $cant, &$total) {
 		$db = new Db();
-		$query = "Select SQL_CALC_FOUND_ROWS  e.nombre as equipo, c.* from goleadores c, equipos e where c.idEquipo = e.id ";
+		$query = "Select SQL_CALC_FOUND_ROWS  e.nombre as equipo, c.*, t.nombre as torneo from goleadores c, equipos e, torneos t where c.idEquipo = e.id and c.idTorneo = t.id ";
 		if (trim($filtros["fnombre"]) != "")		 
-			$query.= " and c.nombre like '%".strtoupper($_REQUEST["fnombre"])."%'";		  
+			$query.= " and c.nombre like '%".strtoupper($_REQUEST["fnombre"])."%'";
+		if (trim($filtros["ftorneo"]) != "")		 
+			$query.= " and t.nombre  like '%".strtoupper($filtros["ftorneo"])."%'";	  
+		if (trim($filtros["fequipo"]) != "")		 
+			$query.= " and e.nombre  like '%".strtoupper($filtros["fequipo"])."%'";	  
 		$query.= "ORDER BY goles DESC LIMIT $inicio,$cant";
 		$datos = $db->getResults($query, ARRAY_A); 
 		$cant_reg = $db->getResults("SELECT FOUND_ROWS() cant", ARRAY_A); 

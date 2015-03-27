@@ -106,6 +106,10 @@
               <div >
                 <form name="frm_busqueda" id="frm_busqueda" action="<?=$_SERVER['PHP_SELF']?>" method="post">
                   <div class="formbody"> Nombre: <input name="fnombre" type="text" style="width:50px" value="<?=$_POST["fnombre"]?>"  />
+				   Torneo:
+                    <input name="ftorneo" type="text" style="width:100px" value="<?=$_POST["ftorneo"]?>"  />
+				   Equipo:
+                    <input name="fequipo" type="text" style="width:100px" value="<?=$_POST["fequipo"]?>"  />
                     <input type="hidden" name="_pag" value="<?=$pag?>" />
                     <input type="hidden" name="id" value="<?=$_POST["id"]?>" />
                     <input type="hidden" name="accion" value="" />
@@ -153,6 +157,7 @@
                   <tr>
                     <th width="5%">#</th>
                     <th >Nombre</th>
+					<th >Torneo</th>
 					<th >Equipo</th>
 					<th >Goles</th>
                     <th width="10%">Opciones</th>
@@ -169,6 +174,7 @@
                   <tr style="vertical-align:middle" >
                     <td align="left"><?=$datos[$i]["id"]?></td>
                     <td align="left"><?=$datos[$i]["nombre"]?></td>
+					<td align="left"><?=$datos[$i]["torneo"]?></td>
 				    <td align="left"><?=$datos[$i]["equipo"]?></td>
 					<td align="left"><?=$datos[$i]["goles"]?></td>
                     <td nowrap><a href="javascript:editar(<?=$datos[$i]["id"]?>);"> <img border="0" src="images/icono-editar.gif" alt="editar" title="editar" /></a> <a href="javascript:borrar(<?=$datos[$i]["id"]?>);"><img border="0" src="images/icono-eliminar.gif" alt="eliminar" title="eliminar" /></a> </td>

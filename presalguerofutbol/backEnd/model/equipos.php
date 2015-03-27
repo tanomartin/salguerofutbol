@@ -114,6 +114,17 @@ class Equipos {
 		$db->close();
 		return $res;
 	}
+	
+	function getTorneoCat($id="") {
+		$db = new Db();
+		$query = "Select e.*
+				  from equipos e
+				  where e.idTorneoZona =  '$id'" ;
+		$query .= " order by e.nombre";
+		$res = $db->getResults($query, ARRAY_A); 
+		$db->close();
+		return $res;
+	}
 
 
 	function getPaginado($filtros, $inicio, $cant, &$total) {
@@ -136,13 +147,15 @@ class Equipos {
 		$db->close();
 		return $datos;	
 	}
-
-
-	function getTorneoCat($id="") {
+	
+	function getByIdTorneo($idTorneo="") {
 		$db = new Db();
-		$query = "Select e.*
-				  from equipos e
-				  where e.idTorneoZona =  '$id'" ;
+		$query = "Select e.*, t.nombre as torneo, z.nombreCorto as zona
+				  from equipos e, torneos_zonas tz, torneos t, zonas z
+				  where e.idTorneoZona =  tz.id and tz.id_torneo = t.id and tz.id_zona = z.id" ;
+		if ($idTorneo != "") {
+			$query .= " and t.id = $idTorneo ";
+		}
 		$query .= " order by e.nombre";
 		$res = $db->getResults($query, ARRAY_A); 
 		$db->close();
