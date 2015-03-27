@@ -142,7 +142,7 @@ class Equipos {
 		$query = "Select e.*
 				  from equipos e
 				  where e.id <> '$id'";
-		$res = $db->getResults($query, ARRAY_A); 
+		$res = $db->getResults($query, ARRAY_A);
 		$db->close();
 		return $res;
 	}

@@ -1,5 +1,8 @@
 <?	include_once "include/fechas.php";
+	include_once "../model/torneos.php";
+	include_once "../model/torneos.zonas.php";	
 	include_once "../model/amistosos.php";
+	include_once "../model/fechas.php";	
 	include_once "../model/equipos.php";	
 	include_once "../model/sedes.php";	
 	include_once "include/control_session.php";
@@ -7,15 +10,18 @@
 	$operacion = "Alta";
 	if ($_POST["id"] != -1) {
 		$operacion = "Modificaci&oacute;n";
-		$oFixture= new Amistosos();
-		$datos = $oFixture->get($_POST["id"]);
+		$oAmistoso = new Amistosos();
+		$datos = $oAmistoso->get($_POST["id"]);
 	
 	}
 
-
 	$disabled = "";
+	
 	if( $_POST['accion'] == 'ver')
 		$disabled = "disabled";
+
+	$oTorneo= new Torneos();
+	$aTorneos = $oTorneo->get();
 
 	$oSede= new Sedes();
 	$aSedes = $oSede->get();
@@ -59,7 +65,7 @@
           <div class="ce_text block">
             <h1>
               <?=$operacion?>
-              de Partido Amistoso </h1>
+              del Amistoso </h1>
           </div>
           <!-- indexer::stop -->
           <div class="mod_registration  tableform block">
@@ -73,7 +79,7 @@
               <div class="formbody">
                 <div class="ce_table">
                   <fieldset>
-                  <legend>Datos del Partido Amistoso </legend>
+                  <legend>Datos del Amistoso </legend>
                   </fieldset>
                   <table summary="Personal data" cellpadding="0" cellspacing="0">
                     <tbody><tr class="even">
@@ -91,7 +97,8 @@
                       <tr class="even">
                         <td class="col_0 col_first"><label for="nombre">Sede</label>
                           <span class="mandatory">*</span></td>
-                        <td class="col_1 col_last"><select name="idSede" id='idSede' <?= $disabled ?> class="validate-selection">
+                        <td class="col_1 col_last">
+						<select name="idSede" id='idSede' <?= $disabled ?> class="validate-selection">
                             <option value="-1">Seleccione una Sede...</option>
                             <?php for($i=0;$i<count($aSedes);$i++) { ?>
                             <option value="<?php echo $aSedes[$i]['id'] ?>" <?php if ($datos[0]["idSede"] ==   $aSedes[$i]['id'] ) echo "selected"; ?>><?php echo $aSedes[$i]['nombre'] ?> </option>
@@ -106,12 +113,12 @@
                         <td class="col_0 col_first"><label for="nombre">Equipo #1 </label>
                           <span class="mandatory">*</span></td>
                         <td class="col_1 col_last"><span id="Equipo1List">
-                          <select name="idEquipo1" id="idEquipo1" <?= $disabled ?> class="validate-selection" onChange="clearEquipo2('idEquipo2');return listOnChange('idEquipo1', '', 'Equipo2List','equipo2_data.php','advice4','idEquipo2','idEquipo2');" >
-                            <option value="-1">Seleccione Equipo...</option>
+                          <select name="idEquipo1" id="idEquipo1" <?= $disabled ?> class="validate-selection" onChange="clearEquipo2('idEquipo2');return listOnChange('idEquipo1', '', 'Equipo2List','equipoAmistoso_data.php','advice4','idEquipo2','idEquipo2');" >
+                            <option value="-1">Seleccione antes una Fecha...</option>
                             <?
-						 if($datos[0]["idEquipo1"]) {
+						 if($datos[0]["idEquipo1"] || $operacion == "Alta") {
 							$oEquipos = new Equipos();
-							$aEquipos = $oEquipos->getEquiposSinTorneo($datos[0]["idEquipo1"]);
+							$aEquipos = $oEquipos->getEquiposSinTorneo($datos[0]["idTorneoZona"]);
 
 							for ($i=0;$i<count($aEquipos);$i++) 
 							{
@@ -135,7 +142,7 @@
                             <?
                                  if($datos[0]["idEquipo2"]) {
                                     $oEquipos = new Equipos();
-                                    $aEquipos = $oEquipos->getEquiposSinTorneo($datos[0]["idEquipo2"]);
+                                    $aEquipos = $oEquipos->getEquiposSinTorneo($datos[0]["idEquipo1"]);
         
                                     for ($i=0;$i<count($aEquipos);$i++) 
                                     {

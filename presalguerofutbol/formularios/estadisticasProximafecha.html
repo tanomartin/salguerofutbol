@@ -88,7 +88,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 			<h4> {{ zona.nombreLargo }}</h4>
 			<h5> {{ zona.nombrePagina }}</h5>
 			{% if partidos|length > 0 %}
-			  	<h3> Proximos Horarios "{{ fecha.nombre }}"</h3>
+			  	<h3> Proximos Horarios </h3>
+				<h3> "{{ fecha.nombre }}" </h3>
 				<table border="1" cellpadding="0" cellspacing="0" width="800" align="center">
 				  <thead>
 					<tr> 
@@ -118,6 +119,38 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 			{% endif %} 
 	  </div>
 	</div>
+	
+	{% if amistosos|length > 0 %}
+	<div class="clearfix">
+	  <div class="copy">
+			  	<h3> Proximos Amistosos </h3>
+				<table border="1" cellpadding="0" cellspacing="0" width="800" align="center">
+				  <thead>
+					<tr> 
+					  <th style="text-align:center">Dia</th>
+					  <th style="text-align:center">Hora</th>
+					  <th style="text-align:center">Sede</th>
+					  <th style="text-align:center">Cancha</th>
+					  <th style="text-align:center">Local</th>
+					  <th style="text-align:center">Visitante</th>
+					</tr>
+				  </thead>
+				  <tbody>
+				  {% for amistoso in amistosos %}
+				  <tr>
+				  	<td>{{ amistoso.fechaPartidoFormato }}</td>
+					<td>{{ amistoso.horaPartido }}</td>
+					<td>{{ amistoso.sede }}</td>
+					<td>{{ amistoso.cancha }}</td>
+					<td>{{ amistoso.equipo1 }}</td>
+					<td>{{ amistoso.equipo2 }}</td>
+				  </tr>
+				  {% endfor %}
+				  </tbody>
+				</table>
+	  </div>
+	</div>
+	{% endif %} 
 	
 	<div class="footer">
 	  <div class="container">

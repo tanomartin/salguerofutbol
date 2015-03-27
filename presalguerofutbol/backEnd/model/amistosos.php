@@ -45,16 +45,14 @@ class Amistosos {
 	function insertar() {
 		$db = new Db();
 		$query = "insert into amistosos(
-				idEquipo1,idEquipo2,fechaPartido,horaPartido,idSede,cancha,golesEquipo1,golesEquipo2,suspendido
+				idEquipo1,idEquipo2,fechaPartido,horaPartido,idSede,cancha
 				) values (".
 				"'".$this->idEquipo1."',".			
 				"'".$this->idEquipo2."',".
 				"'".$this->fechaPartido."',".
 				"'".$this->horaPartido."',".
 				"'".$this->idSede."',".
-				"'".$this->cancha."',".				
-				"'".$this->golesEquipo1."',".
-				"'".$this->golesEquipo2."')";
+				"'".$this->cancha."')";
 		$this->id = $db->query($query); 
 		$db->close();
 	}
@@ -74,9 +72,7 @@ class Amistosos {
 		          fechaPartido = '". $this->fechaPartido."',
 		          horaPartido = '". $this->horaPartido."',
 		          idSede = '". $this->idSede."',
-		          cancha = '". $this->cancha."',
-		          golesEquipo1 = '". $this->golesEquipo1."',
-		          golesEquipo2 = '". $this->golesEquipo2."'
+		          cancha = '". $this->cancha."'
 				  where id = ".$this->id ;
 		$db->query($query); 
 		$db->close();
@@ -87,7 +83,7 @@ class Amistosos {
 		$query = "Select e.*
 				  from amistosos e" ;
 		if ($id != "") {
-			$query .= " and e.id = '$id' ";
+			$query .= " where e.id = '$id' ";
 		}
 		$query .= " order by e.fechaPartido";
 		$res = $db->getResults($query, ARRAY_A); 
@@ -100,8 +96,7 @@ class Amistosos {
 		$query = "Select SQL_CALC_FOUND_ROWS  x.*, e1.nombre as equipo1, e2.nombre as equipo2
 		          from amistosos x
 				  left join  equipos e1 on x.idEquipo1 = e1.id 
-				  left join  equipos e2  on x.idEquipo2 = e2.id 
-				  where 1 = 1 ";
+				  left join  equipos e2  on x.idEquipo2 = e2.id ";
 		if (trim($filtros["fnombre"]) != "")		 
 			$query.= " and e1.nombre like '%".strtoupper($filtros["fnombre"])."%'";		    
 		$query.= " order by fechaPartido DESC, horaPartido DESC LIMIT $inicio,$cant";
@@ -110,6 +105,21 @@ class Amistosos {
 		$total = ceil( $cant_reg[0]["cant"] / $cant );
 		$db->close();
 		return $datos;	
+	}
+	
+	function getByIdEquipo($arrayIdEquipo="") {
+		$db = new Db();
+		$query = "Select SQL_CALC_FOUND_ROWS  x.*, DATE_FORMAT(x.fechaPartido, '%d/%m/%Y') as fechaPartidoFormato, e1.nombre as equipo1, e2.nombre as equipo2, s.nombre as sede
+		          from amistosos x
+				  left join  equipos e1 on x.idEquipo1 = e1.id 
+				  left join  equipos e2  on x.idEquipo2 = e2.id
+				  left join  sedes s  on x.idSede = s.id
+				  where
+				  x.idEquipo1 in ($arrayIdEquipo) || x.idEquipo2 in ($arrayIdEquipo) 
+				  order by fechaPartido DESC, horaPartido DESC";
+		$res = $db->getResults($query, ARRAY_A); 
+		$db->close();
+		return $res;
 	}
 }
 
