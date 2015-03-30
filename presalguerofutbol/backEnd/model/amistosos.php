@@ -93,10 +93,11 @@ class Amistosos {
 
 	function getPaginado($filtros, $inicio, $cant, &$total) {
 		$db = new Db();
-		$query = "Select SQL_CALC_FOUND_ROWS  x.*, e1.nombre as equipo1, e2.nombre as equipo2
+		$query = "Select SQL_CALC_FOUND_ROWS  x.*, e1.nombre as equipo1, e2.nombre as equipo2, s.nombre as sede
 		          from amistosos x
 				  left join  equipos e1 on x.idEquipo1 = e1.id 
-				  left join  equipos e2  on x.idEquipo2 = e2.id ";
+				  left join  equipos e2  on x.idEquipo2 = e2.id 
+				  left join  sedes s on x.idSede = s.id ";
 		if (trim($filtros["fnombre"]) != "")		 
 			$query.= " and e1.nombre like '%".strtoupper($filtros["fnombre"])."%'";		    
 		$query.= " order by fechaPartido DESC, horaPartido DESC LIMIT $inicio,$cant";
@@ -136,6 +137,23 @@ class Amistosos {
 		$res = $db->getResults($query, ARRAY_A); 
 		$db->close();
 		return $res;
+	}
+	
+	function existePrevio($idAmistoso="") {
+		$db = new Db();
+		$query = "select count(*) as cantidad from amistosos where 
+		          fechaPartido = '". $this->fechaPartido."' and
+		          horaPartido = '". $this->horaPartido."' and
+		          idSede = '". $this->idSede."' and
+		          cancha = '". $this->cancha."' and id <> '$idAmistoso'";
+		//print($query."<br>");
+		$res = $db->getRow($query); 
+		$db->close();
+		if($res->cantidad == 0) {
+			return false;
+		} else {
+			return true;
+		}
 	}
 }
 

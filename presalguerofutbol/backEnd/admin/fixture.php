@@ -1,6 +1,7 @@
 <?	include_once "include/config.inc.php";
 	include_once "include/fechas.php";
 	include_once "../model/fixture.php";
+	include_once "../model/amistosos.php";
 	include_once "include/control_session.php";
 
 	switch ($_POST["accion"]) {
@@ -19,10 +20,24 @@
 			$data =   $_POST;
 			$oObj = new Fixture();
 			$oObj->set($data);
-			if($_POST["id"] == "-1") { // Tiene el valor de session_id()
-				$oObj->insertar();
+			$existePartido = $oObj->existePrevio($_POST["id"]);
+			
+			$oAmistosos = new Amistosos();
+			$oAmistosos->set($data);
+			$existeAmistoso = $oAmistosos->existePrevio();
+			
+			if ($existeAmistoso || $existePartido) {
+				$errorExiste = 1;
+				$datos[0] = $_POST;
+				include("fixture.edit.php");
+				exit;
+				break;
 			} else {
-				$oObj->actualizar();
+				if($_POST["id"] == "-1") { // Tiene el valor de session_id()
+					$oObj->insertar();
+				} else {
+					$oObj->actualizar();
+				}
 			}
 			break;
 

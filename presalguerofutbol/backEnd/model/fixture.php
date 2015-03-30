@@ -250,6 +250,24 @@ class Fixture {
 		$db->close();
 		return $datos;
 	}
+	
+	function existePrevio($idPartido="") {
+		$db = new Db();
+		$query = "select count(*) as cantidad from partidos where 
+		          fechaPartido = '". $this->fechaPartido."' and
+		          horaPartido = '". $this->horaPartido."' and
+		          idSede = '". $this->idSede."' and
+		          cancha = '". $this->cancha."' and id <> '$idPartido'";
+		$res = $db->getRow($query); 
+		//print($query."<br>");
+		$db->close();
+		if($res->cantidad == 0) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+	
 }
 
 ?>

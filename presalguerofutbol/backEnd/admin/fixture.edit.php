@@ -9,7 +9,7 @@
 	include_once "include/control_session.php";
 	
 	$operacion = "Alta";
-	if ($_POST["id"] != -1) {
+	if ($_POST["id"] != -1 && !isset($errorExiste)) {
 		$operacion = "Modificaci&oacute;n";
 		$oFixture= new Fixture();
 		$datos = $oFixture->get($_POST["id"]);
@@ -33,6 +33,12 @@
 
 	$oSede= new Sedes();
 	$aSedes = $oSede->get();
+	
+	if (isset($errorExiste)) {
+		$error = "No se puede guardar el partido. Existe uno en el mismo día, horario, sede y cancha";
+	} else {
+		$error = "";
+	}
 
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -87,8 +93,9 @@
               <div class="formbody">
                 <div class="ce_table">
                   <fieldset>
-                  <legend>Datos del Fixture </legend>
+                  <legend>Datos del Partido </legend>
                   </fieldset>
+				  <div id="error" style="color:#FF0000"><b><?=$error?></b></div>
                   <table summary="Personal data" cellpadding="0" cellspacing="0">
                     <tbody>
                       <tr class="odd">

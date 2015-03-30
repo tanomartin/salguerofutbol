@@ -8,7 +8,7 @@
 	include_once "include/control_session.php";
 	
 	$operacion = "Alta";
-	if ($_POST["id"] != -1) {
+	if ($_POST["id"] != -1 && !isset($errorExiste)) {
 		$operacion = "Modificaci&oacute;n";
 		$oAmistoso = new Amistosos();
 		$datos = $oAmistoso->get($_POST["id"]);
@@ -16,8 +16,14 @@
 
 	$disabled = "";
 	
-	if( $_POST['accion'] == 'ver')
+	if($_POST['accion'] == 'ver')
 		$disabled = "disabled";
+	
+	if (isset($errorExiste)) {
+		$error = "No se puede guardar el partido. Existe uno en el mismo día, horario, sede y cancha";
+	} else {
+		$error = "";
+	}
 
 	$oTorneo= new Torneos();
 	$aTorneos = $oTorneo->get();
@@ -85,6 +91,7 @@
                   <fieldset>
                   <legend>Datos del Amistoso </legend>
                   </fieldset>
+				  <div id="error" style="color:#FF0000"><b><?=$error?></b></div>
                   <table summary="Personal data" cellpadding="0" cellspacing="0">
                     <tbody><tr class="even">
                         <td class="col_0 col_first"><label for="nombre">Fecha Partido</label>

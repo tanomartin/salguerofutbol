@@ -1,6 +1,7 @@
 <?	include_once "include/config.inc.php";
 	include_once "include/fechas.php";
 	include_once "../model/amistosos.php";
+	include_once "../model/fixture.php";
 	include_once "include/control_session.php";
 
 	switch ($_POST["accion"]) {
@@ -16,13 +17,28 @@
 			break;
 			
 		case "guardar":	
-			$data =   $_POST;
+			$data = $_POST;
+			
 			$oObj = new Amistosos();
 			$oObj->set($data);
-			if($_POST["id"] == "-1") { // Tiene el valor de session_id()
-				$oObj->insertar();
+			$existeAmistoso = $oObj->existePrevio($_POST["id"]);
+			
+			$oFixture = new Fixture();
+			$oFixture->set($data);
+			$existePartido = $oFixture->existePrevio();
+			
+			if ($existeAmistoso || $existePartido) {
+				$errorExiste = 1;
+				$datos[0] = $_POST;
+				include("amistosos.edit.php");
+				exit;
+				break;
 			} else {
-				$oObj->actualizar();
+				if($_POST["id"] == "-1") { // Tiene el valor de session_id()
+					$oObj->insertar();
+				} else {
+					$oObj->actualizar();
+				}
 			}
 			break;
 
@@ -157,12 +173,14 @@
                   <? } ?>
                 </div>
                 <div align="right" style="margin-right:10px; margin-bottom:10px" >
-                  <input class="button" onclick="javascript:nuevo()" type="button" value="Nuevo Partido" />
+                  <input class="button" onclick="javascript:nuevo()" type="button" value="Nuevo Amistoso" />
                 </div>
                 <table width="928">
                   <tr>
                     <th>Fecha</th>
                     <th>Hora</th>
+					<th>Sede</th>
+					<th>Cancha</th>
 					<th>Equipo 1</th>
                     <th>Equipo 2</th>             
                     <th>Opciones</th>
@@ -180,9 +198,11 @@
                   <tr>
 				   <td align="left"><?=cambiaf_a_normal($datos[$i]["fechaPartido"])?></td>
                     <td align="left"><?=$datos[$i]["horaPartido"]?></td>
+					<td align="left"><?=$datos[$i]["sede"]?></td>
+					<td align="left"><?=$datos[$i]["cancha"]?></td>
                     <td align="left"><?=$datos[$i]["equipo1"]?></td>
                     <td align="left"><?=$datos[$i]["equipo2"]?></td>
-                    <td nowrap><a href="javascript:ver(<?=$datos[$i]["id"]?>);"> <img border="0" src="images/find-icon.png" alt="ver" title="ver" width="20px" height="20px" /></a> <a href="javascript:editar(<?=$datos[$i]["id"]?>);"> <img border="0" src="images/icono-editar.gif" alt="editar" title="editar" /></a> <a href="javascript:borrar(<?=$datos[$i]["id"]?>);"><img border="0" src="images/icono-eliminar.gif" alt="eliminar" title="eliminar" /></a> <a href="javascript:resultado(<?=$datos[$i]["id"]?>);"></a> </td>
+                    <td nowrap><a href="javascript:ver(<?=$datos[$i]["id"]?>);"></a> <a href="javascript:editar(<?=$datos[$i]["id"]?>);"> <img border="0" src="images/icono-editar.gif" alt="editar" title="editar" /></a> <a href="javascript:borrar(<?=$datos[$i]["id"]?>);"><img border="0" src="images/icono-eliminar.gif" alt="eliminar" title="eliminar" /></a> <a href="javascript:resultado(<?=$datos[$i]["id"]?>);"></a> </td>
                   </tr>
                   <? } }?>
                 </table>
