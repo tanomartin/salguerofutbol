@@ -153,13 +153,14 @@
                   <tr>
                     <th width="5%">#</th>
                     <th >Nombre</th>
+					<th >Torneo</th>
 					<th >Equipo</th>
 					<th >Sansion</th>
                     <th width="10%">Opciones</th>
                   </tr>
                   <? if (count($datos) == 0) { ?>
                   <tr>
-                    <td colspan="5" align="center">No existen Expulsados </td>
+                    <td colspan="6" align="center">No existen Expulsados </td>
                   </tr>
                   <? } else { 
 				 
@@ -169,6 +170,7 @@
                   <tr style="vertical-align:middle" >
                     <td align="left"><?=$datos[$i]["id"]?></td>
                     <td align="left"><?=$datos[$i]["nombre"]?></td>
+					<td align="left"><?=$datos[$i]["torneo"]?></td>
 				    <td align="left"><?=$datos[$i]["equipo"]?></td>
 					<td align="left"><?=$datos[$i]["sancion"]?></td>
                     <td nowrap><a href="javascript:editar(<?=$datos[$i]["id"]?>);"> <img border="0" src="images/icono-editar.gif" alt="editar" title="editar" /></a> <a href="javascript:borrar(<?=$datos[$i]["id"]?>);"><img border="0" src="images/icono-eliminar.gif" alt="eliminar" title="eliminar" /></a> </td>

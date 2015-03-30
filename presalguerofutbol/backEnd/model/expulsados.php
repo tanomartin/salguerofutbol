@@ -5,6 +5,7 @@ class Expulsados {
 
 	var $id;
 	var $nombre;
+	var $idTorneo;
 	var $idEquipo;
 	var $sancion;
 	
@@ -13,6 +14,7 @@ class Expulsados {
 			$expusaldos = $this->get($id);
 			$this->id = $goleadores[0]["id"]; 
 			$this->nombre = $goleadores[0]["nombre"];
+			$this->idTorneo = $goleadores[0]["idTorneo"];
 			$this->idEquipo = $goleadores[0]["idEquipo"];
 			$this->sancion = $goleadores[0]["sancion"];
 		}
@@ -21,6 +23,7 @@ class Expulsados {
 	function set($valores){
 		$this->id = $valores["id"]; 
 		$this->nombre = $valores["nombre"];
+		$this->idTorneo = $valores["idTorneo"];
 		$this->idEquipo = $valores["idEquipo"];
 		$this->sancion = $valores["sancion"];
 	}
@@ -32,7 +35,7 @@ class Expulsados {
 	
 	function get($id="") {
 		$db = new Db();
-		$query = "Select c.*, e.nombre as equipo from expulsados c, equipos e where c.idEquipo = e.id" ;
+		$query = "Select c.*, e.nombre as equipo, t.nombre as torneo from expulsados c, equipos e, torneos t where c.idEquipo = e.id and c.idTorneo = t.id" ;
 		if ($id != "") {
 			$query .= " and c.id = '$id' ";
 		}
@@ -44,7 +47,7 @@ class Expulsados {
 	
 	function agregar() {
 		$db = new Db();	
-		$query = "insert into expulsados(nombre, idEquipo, sancion) values ('".$this->nombre."','".$this->idEquipo."','".$this->sancion."')" ;
+		$query = "insert into expulsados(nombre, idTorneo, idEquipo, sancion) values ('".$this->nombre."','".$this->idTorneo."','".$this->idEquipo."','".$this->sancion."')" ;
 		$db->query($query); 
 		$db->close();
 	}
@@ -60,6 +63,7 @@ class Expulsados {
 		$db = new Db();
 		$query = "update expulsados set 
 		          nombre  = '". $this->nombre."',
+				  idTorneo  = '". $this->idTorneo."',
 				  idEquipo  = '". $this->idEquipo."',
 				  sancion  = '". $this->sancion."'
 				  where id = ".$this->id ;
@@ -69,7 +73,7 @@ class Expulsados {
 	
 	function getPaginado($filtros, $inicio, $cant, &$total) {
 		$db = new Db();
-		$query = "Select SQL_CALC_FOUND_ROWS  e.nombre as equipo, c.* from expulsados c, equipos e where c.idEquipo = e.id ";
+		$query = "Select SQL_CALC_FOUND_ROWS  e.nombre as equipo, t.nombre as torneo, c.* from expulsados c, equipos e, torneos t where c.idEquipo = e.id and c.idTorneo = t.id ";
 		if (trim($filtros["fnombre"]) != "")		 
 			$query.= " and c.nombre like '%".strtoupper($_REQUEST["fnombre"])."%'";		  
 		$query.= "ORDER BY c.nombre DESC LIMIT $inicio,$cant";

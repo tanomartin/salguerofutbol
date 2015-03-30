@@ -1,5 +1,5 @@
 <?	include_once "include/config.inc.php";
-	include_once "../model/sedes.php";
+	include_once "../model/torneos.php";
 	include_once "../model/equipos.php";
 	include_once "include/control_session.php";
 	
@@ -10,6 +10,9 @@
 		$oExpusados = new Expulsados();
 		$datos = $oExpusados->get($_POST["id"]);
 	}
+	
+	$oTorneo= new Torneos();
+	$aTorneos = $oTorneo->get();
 	
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -49,7 +52,7 @@
           <div class="ce_text block">
             <h1>
               <?=$operacion?>
-              de Goleador </h1>
+              de Sancion </h1>
           </div>
           <!-- indexer::stop -->
           <div class="mod_registration g8 tableform block">
@@ -63,14 +66,28 @@
               <div class="formbody">
                 <div class="ce_table">
                   <fieldset>
-                  <legend>Datos del Expulsado </legend>
+                  <legend>Datos de la Sancion </legend>
                   <table summary="Personal data" cellpadding="0" cellspacing="0">
                     <tbody>
                       <tr class="even">
                         <td class="col_0 col_first"><label for="id_opcion">Nombre</label>
                           <span class="mandatory">*</span></td>
-                        <td class="col_1 col_last"><input name="nombre" id="nombre" class="required text" maxlength="100"  size="50" type="text" value="<?=$datos[0]["nombre"]?>"></td>
+                        <td class="col_1 col_last">
+							<input name="nombre" id="nombre" class="required text" maxlength="100"  size="50" type="text" value="<?=$datos[0]["nombre"]?>">
+						</td>
                       </tr>
+					  <tr class="even">
+					   <td class="col_0 col_first"><label for="nombre">Torneo</label>
+                          <span class="mandatory">*</span></td>
+                      <td class="col_1 col_last">
+					  	<select name="idTorneo" id="idTorneo" <?= $disabled ?> class="validate-selection" onchange="clearEquipo1('idEquipo'); return listOnChange('idTorneo', '','Equipo1List','equiposGoleadores_data.php','advice3','idEquipo','idEquipo');" >
+                          <option value="-1">Seleccione un Torneo...</option>
+                          <?php for($i=0;$i<count($aTorneos);$i++) { ?>
+                          <option value="<?php echo $aTorneos[$i]['id'] ?>" <?php if ($datos[0]["idTorneo"] ==   $aTorneos[$i]['id'] ) echo "selected"; ?>><?php echo $aTorneos[$i]['nombre'] ?> </option>
+                          <?php } ?>
+                        </select>
+					  </td>
+					  </tr>
                       <tr class="even">
                         <td class="col_0 col_first"><label for="nombre">Equipo </label>
                             <span class="mandatory">*</span></td>

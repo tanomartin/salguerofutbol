@@ -68,8 +68,16 @@
                   <fieldset>
                   <legend>Datos del Goleador </legend>
                   <table summary="Personal data" cellpadding="0" cellspacing="0">
-                    <tr class="odd">
-                      <td class="col_0 col_first"><label for="nombre">Torneo</label>
+                     <tbody>
+                      <tr class="even">
+                        <td class="col_0 col_first"><label for="id_opcion">Nombre</label>
+                          <span class="mandatory">*</span></td>
+                        <td class="col_1 col_last">
+							<input name="nombre" id="nombre" class="required text" maxlength="100"  size="50" type="text" value="<?=$datos[0]["nombre"]?>">
+						</td>
+					  </tr>
+					  <tr class="even">
+					  <td class="col_0 col_first"><label for="nombre">Torneo</label>
                           <span class="mandatory">*</span></td>
                       <td class="col_1 col_last">
 					  	<select name="idTorneo" id="idTorneo" <?= $disabled ?> class="validate-selection" onchange="clearEquipo1('idEquipo'); return listOnChange('idTorneo', '','Equipo1List','equiposGoleadores_data.php','advice3','idEquipo','idEquipo');" >
@@ -77,14 +85,8 @@
                           <?php for($i=0;$i<count($aTorneos);$i++) { ?>
                           <option value="<?php echo $aTorneos[$i]['id'] ?>" <?php if ($datos[0]["idTorneo"] ==   $aTorneos[$i]['id'] ) echo "selected"; ?>><?php echo $aTorneos[$i]['nombre'] ?> </option>
                           <?php } ?>
-                        </select>                      </td>
-                    </tr>
-                    <tbody>
-                      
-                      <tr class="even">
-                        <td class="col_0 col_first"><label for="id_opcion">Nombre</label>
-                          <span class="mandatory">*</span></td>
-                        <td class="col_1 col_last"><input name="nombre" id="nombre" class="required text" maxlength="100"  size="50" type="text" value="<?=$datos[0]["nombre"]?>"></td>
+                        </select>
+					  </td>
                       </tr>
                       <tr class="even">
                         <td class="col_0 col_first"><label for="nombre">Equipo </label>
