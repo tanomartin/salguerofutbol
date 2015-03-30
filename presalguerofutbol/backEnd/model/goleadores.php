@@ -47,8 +47,7 @@ class Goleadores {
 	
 	function getByTorneo($idTorneo="") {
 		$db = new Db();
-		$query = "Select c.*, e.nombre as equipo, t.nombre as torneo from goleadores c, equipos e, torneos t where c.idTorneo = $idTorneo and c.idEquipo = e.id and c.idTorneo = t.id" ;
-		$query .= " order by goles DESC";
+		$query = "Select c.*, e.nombre as equipo, t.nombre as torneo from goleadores c, equipos e, torneos t where c.idTorneo = $idTorneo and c.idEquipo = e.id and c.idTorneo = t.id order by goles ASC";
 		$res = $db->getResults($query, ARRAY_A); 
 		$db->close();
 		return $res;

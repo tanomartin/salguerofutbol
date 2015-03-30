@@ -45,6 +45,14 @@ class Expulsados {
 		return $res;
 	}
 	
+	function getByTorneo($idTorneo="") {
+		$db = new Db();
+		$query = "Select c.*, e.nombre as equipo, t.nombre as torneo from expulsados c, equipos e, torneos t where c.idEquipo = e.id and c.idTorneo = t.id and t.id = '$idTorneo' order by c.nombre ASC";
+		$res = $db->getResults($query, ARRAY_A); 
+		$db->close();
+		return $res;
+	}
+	
 	function agregar() {
 		$db = new Db();	
 		$query = "insert into expulsados(nombre, idTorneo, idEquipo, sancion) values ('".$this->nombre."','".$this->idTorneo."','".$this->idEquipo."','".$this->sancion."')" ;
