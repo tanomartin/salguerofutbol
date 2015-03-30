@@ -131,7 +131,7 @@ class Fixture {
 	
 	function get($id="") {
 		$db = new Db();
-		$query = "Select e.*, tz.id_torneo, tz.id_zona, tz.id as idTorneoZona
+		$query = "Select e.*, tz.id_torneo as idTorneo, tz.id_zona as idZona, tz.id as idTorneoCat
 				  from partidos e, torneos_zonas tz, fechas f
 				  WHERE e.idFecha = f.id and tz.id = f.idTorneoZona " ;
 		if ($id != "") {

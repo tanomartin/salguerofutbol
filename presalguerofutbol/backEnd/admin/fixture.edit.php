@@ -16,6 +16,8 @@
 	
 	}
 
+	var_dump($datos);
+
     $oFCKeditor = new FCKeditor( "texto" ) ;
     $oFCKeditor -> BasePath = '../_js/FCKeditor/' ;
 	$oFCKeditor -> Height = 250 ;
@@ -105,7 +107,7 @@
          	return listOnChange('idTorneo', '','categoriaList','zona_data1.php','advice1','idTorneoCat','idTorneoCat');" >
                             <option value="-1">Seleccione un Torneo...</option>
                             <?php for($i=0;$i<count($aTorneos);$i++) { ?>
-                            <option value="<?php echo $aTorneos[$i]['id'] ?>" <?php if ($datos[0]["id_torneo"] ==   $aTorneos[$i]['id'] ) echo "selected"; ?>><?php echo $aTorneos[$i]['nombre'] ?> </option>
+                            <option value="<?php echo $aTorneos[$i]['id'] ?>" <?php if ($datos[0]["idTorneo"] ==   $aTorneos[$i]['id'] ) echo "selected"; ?>><?php echo $aTorneos[$i]['nombre'] ?> </option>
                             <?php } ?>
                           </select>
                         </td>
@@ -118,14 +120,14 @@
             listOnChange('idTorneoCat', '', 'fechaList','fecha_data.php','advice2','idFecha','idFecha');" >
                             <option value="-1">Seleccione antes un Torneo...</option>
                             <?
-						 if($datos[0]["id_torneo"]) {
+						 if($datos[0]["idTorneo"]) {
 							$oTorneoZona = new TorneoZona();
-							$aTorneoZona = $oTorneoZona->getByTorneoSub($datos[0]["id_torneo"]);
+							$aTorneoZona = $oTorneoZona->getByTorneoSub($datos[0]["idTorneo"]);
 
 							for ($i=0;$i<count($aTorneoZona);$i++) 
 							{
 						?>
-                            <option <? if($aTorneoZona[$i]["id"] == $datos[0]["idTorneoZona"]) echo "selected"; ?> value="<?=$aTorneoZona[$i]["id"]?>">
+                            <option <? if($aTorneoZona[$i]["id"] == $datos[0]["idTorneoCat"]) echo "selected"; ?> value="<?=$aTorneoZona[$i]["id"]?>">
                             <?=$aTorneoZona[$i]["nombreCorto"]?>
                             <? if ( $aTorneoZona[$i]["nombreCat"] != "" ){ echo "- ". $aTorneoZona[$i]["nombreCat"]; } ?>
                             </option>
@@ -145,7 +147,7 @@
                             <?
 						 if($datos[0]["idFecha"]) {
 							$oFechas = new Fechas();
-							$aFechas = $oFechas->getIdTorneoCat($datos[0]["idTorneoZona"]);
+							$aFechas = $oFechas->getIdTorneoCat($datos[0]["idTorneoCat"]);
 							
 							for ($i=0;$i<count($aFechas);$i++) 
 							{
@@ -198,7 +200,7 @@
                             <?
 						 if($datos[0]["idEquipo1"]) {
 							$oEquipos = new Equipos();
-							$aEquipos = $oEquipos->getTorneoCat($datos[0]["idTorneoZona"]);
+							$aEquipos = $oEquipos->getTorneoCat($datos[0]["idTorneoCat"]);
 
 							for ($i=0;$i<count($aEquipos);$i++) 
 							{
