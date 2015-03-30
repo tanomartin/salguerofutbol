@@ -185,9 +185,9 @@ class Equipos {
 	
 	function getEquiposSinTorneo($id="") {
 		$db = new Db();
-		$query = "Select e.*
-				  from equipos e
-				  where e.id <> '$id'";
+		$query = "Select e.*, z.nombreCorto as zona
+				  from equipos e, torneos_zonas tz, zonas z
+				  where e.id <> '$id' and e.idTorneoZona = tz.id and tz.id_zona = z.id" ;
 		$res = $db->getResults($query, ARRAY_A);
 		$db->close();
 		return $res;

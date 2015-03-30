@@ -12,7 +12,6 @@
 		$operacion = "Modificaci&oacute;n";
 		$oAmistoso = new Amistosos();
 		$datos = $oAmistoso->get($_POST["id"]);
-	
 	}
 
 	$disabled = "";
@@ -43,6 +42,11 @@
 	
 		document.form_alta.accion.value = "volver";		
 		document.form_alta.submit();
+	}
+
+	function validarPartido(formulario) {
+		alert("lalala");
+		return false;
 	}
 
 </script>
@@ -114,17 +118,17 @@
                           <span class="mandatory">*</span></td>
                         <td class="col_1 col_last"><span id="Equipo1List">
                           <select name="idEquipo1" id="idEquipo1" <?= $disabled ?> class="validate-selection" onChange="clearEquipo2('idEquipo2');return listOnChange('idEquipo1', '', 'Equipo2List','equipoAmistoso_data.php','advice4','idEquipo2','idEquipo2');" >
-                            <option value="-1">Seleccione antes una Fecha...</option>
+                            <option value="-1">Seleccione un Equipo...</option>
                             <?
 						 if($datos[0]["idEquipo1"] || $operacion == "Alta") {
 							$oEquipos = new Equipos();
-							$aEquipos = $oEquipos->getEquiposSinTorneo($datos[0]["idTorneoZona"]);
+							$aEquipos = $oEquipos->getEquiposSinTorneo();
 
 							for ($i=0;$i<count($aEquipos);$i++) 
 							{
 						?>
                             <option <? if($aEquipos[$i]["id"] == $datos[0]["idEquipo1"]) echo "selected"; ?> value="<?=$aEquipos[$i]["id"]?>">
-                            <?=$aEquipos[$i]["nombre"]?>
+                            <?=$aEquipos[$i]["nombre"]."-".$aEquipos[$i]["zona"]?>
                             </option>
                             <?							
 							}
@@ -148,7 +152,7 @@
                                     {
                                 ?>
                             <option <? if($aEquipos[$i]["id"] == $datos[0]["idEquipo2"]) echo "selected"; ?> value="<?=$aEquipos[$i]["id"]?>">
-                            <?=$aEquipos[$i]["nombre"]?>
+                           <?=$aEquipos[$i]["nombre"]."-".$aEquipos[$i]["zona"]?>
                             </option>
                             <?							
                                     }
@@ -164,24 +168,12 @@
                     <? if ( $disabled  == "" ) { ?>
                     <input class="submit" onclick="valirdarForm_submit('form_alta')" type="button" value="Guardar" />
                     <? } ?>
-                    <!--    <input class="submit" type="button" value="Limpiar" onclick="javascript:limpiar('form_alta');" />-->
                     <input class="submit" type="button" value="Volver" onclick="javascript:volver();" />
                   </div>
                 </div>
               </div>
             </form>
           </div>
-          <!-- indexer::continue -->
-          <!--
-
-<div class="ce_text g4 xpln block">
-
-	<p><strong>Datos del Fixture</strong><br>
-	Ingrese los datos del Fixture.</p>
-	<p>Los campos marcados con <span class="mandatory">*</span> son de ingreso obligatorio.</p>
-
-</div>
--->
           <div class="clear"></div>
         </div>
       </div>

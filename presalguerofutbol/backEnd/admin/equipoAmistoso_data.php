@@ -11,7 +11,7 @@
 		<option value="-1">Seleccione un Equipo...</option>
 	<? } ?>    
 <? 	for ($i=0;$i<count($aEquipos);$i++) { ?>		
-		<option value="<?=$aEquipos[$i]["id"]?>"><?=$aEquipos[$i]["nombre"]?></option>
+		<option value="<?=$aEquipos[$i]["id"]?>"><?=$aEquipos[$i]["nombre"]."-".$aEquipos[$i]["zona"]?></option>
 <? } ?>
 	</select>
 	<span id="<?=$_REQUEST["id_status"]?>"> </span>
