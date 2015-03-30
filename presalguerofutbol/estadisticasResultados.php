@@ -5,6 +5,7 @@
 	include_once "backEnd/model/torneos.zonas.php";
 	include_once "backEnd/model/zonas.php";
 	include_once "backEnd/model/equipos.php";
+	include_once "backEnd/model/fixture.php";
 	
 	$torneosZonas = array();
 	$oObj = new Torneos();
@@ -21,9 +22,13 @@
 	$zona = $oZonas->get($_GET['idZonaActiva']);
 
 	$oEquipos = new Equipos();
-	$equipos = $oEquipos->getTorneoCat($_GET['idTorneoZonaActiva']);
+	$equipo = $oEquipos->get($_GET['idEquipo']);
+
+	$oFixture = new Fixture();
+	$partidos = $oFixture -> getByEquipo( $_GET['idTorneoZonaActiva'], $_GET['idEquipo']);
+
 
 	// Cargo la plantilla
-	$twig->display('estadisticasEquipos.html',array("torneosZonas" => $torneosZonas, "idTorneoZonaActivo" => $_GET['idTorneoZonaActiva'], "idTorneoActivo" => $_GET['idTorneoActivo'], "equipos" => $equipos, "zona" => $zona[0]));
+	$twig->display('estadisticasResultados.html',array("torneosZonas" => $torneosZonas, "idTorneoZonaActivo" => $_GET['idTorneoZonaActiva'], "idTorneoActivo" => $_GET['idTorneoActivo'], "equipo" => $equipo[0], "zona" => $zona[0], "partidos" => $partidos));
 
 ?>

@@ -87,21 +87,80 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 			<h2> {{ zona.nombreCorto }}</h2>
 			<h4> {{ zona.nombreLargo }}</h4>
 			<h5> {{ zona.nombrePagina }}</h5>
-			{% if equipos|length > 0 %}
-			  	<h3> Equipos </h3><br>
-				  {% for equipo in equipos %}
-				 		<h4>{{ equipo.nombre }}</h4>
-						{% if equipo.foto != '' %}
-							{% set archivo = equipo.foto %}
-						{% else %}
-							{% set archivo = "default.jpg" %}
-						{% endif %} 
-						<div><img src="backEnd/fotos_equipos/{{ archivo }}" WIDTH="330" HEIGHT="258" BORDER="0" HSPACE="8" VSPACE="8"  bgcolor="#FFFFFF"></div>
-						<a href="estadisticasResultados.php?idTorneoZonaActiva={{ idTorneoZonaActivo }}&idZonaActiva={{ zona.id }}&idTorneoActivo={{ idTorneoActivo }}&idEquipo={{ equipo.id }}"><button type="button" class="btn btn-info">Ver Resultados</button></a>
-						<br><br><br>
-				  {% endfor %}
+			<a href="estadisticasEquipos.php?idTorneoZonaActiva={{ idTorneoZonaActivo }}&idZonaActiva={{ zona.id }}&idTorneoActivo={{ idTorneoActivo }}"><button type="button" class="btn btn-info">Ver Equipos</button></a>
+			<br><br>
+			<h4> {{ equipo.nombre }}</h4>
+			{% if equipo.foto != '' %}
+				{% set archivo = equipo.foto %}
 			{% else %}
-				<h3> No hay Equipos en Esta Zona</h3>
+				{% set archivo = "default.jpg" %}
+			{% endif %} 
+			<div><img src="backEnd/fotos_equipos/{{ archivo }}" WIDTH="330" HEIGHT="258" BORDER="0" HSPACE="8" VSPACE="8"  bgcolor="#FFFFFF"></div>
+			
+			{% if partidos|length > 0 %}
+			  	<h3> Resultados </h3><br>
+				  <table border="1" cellpadding="0" cellspacing="0" width="900" align="center">
+				  <thead>
+					<tr> 
+					  <th style="text-align:center">Fecha</th>	
+					  <th style="text-align:center">Dia</th>
+					  <th style="text-align:center">Hora</th>
+					  <th style="text-align:center">Sede</th>
+					  <th style="text-align:center">Cancha</th>
+					  <th style="text-align:center">Local</th>
+					  <th style="text-align:center">G.L.</th>
+					  <th style="text-align:center">G.V.</th>
+					  <th style="text-align:center">Visitante</th>
+					</tr>
+				  </thead>
+				  <tbody>
+				  {% for partido in partidos %}
+				  <tr>
+				  	<td>{{ partido.nombreFecha }}</td>
+				  	<td>{{ partido.fechaPartidoFormato }}</td>
+					<td>{{ partido.horaPartido }}</td>
+					<td>{{ partido.sede }}</td>
+					<td>{{ partido.cancha }}</td>
+					
+					{% if partido.equipo1 == equipo.nombre %}
+						<td><b>{{ partido.equipo1 }}</b></td>
+						{% if partido.golesEquipo1 == -1 %}
+							<td>-</td>
+						{% else %}
+							<td><b>{{ partido.golesEquipo1 }}</b></td>
+						{% endif %} 	
+					{% else %}
+						<td>{{ partido.equipo1 }}</td>
+						{% if partido.golesEquipo1 == -1 %}
+							<td>-</td>
+						{% else %}
+							<td>{{ partido.golesEquipo1 }}</td>
+						{% endif %} 
+					{% endif %} 	
+					
+					{% if partido.equipo2 == equipo.nombre %}
+						{% if partido.golesEquipo2 == -1 %}
+							<td>-</td>
+						{% else %}
+							<td><b>{{ partido.golesEquipo2 }}</b></td>
+						{% endif %} 
+						<td><b>{{ partido.equipo2 }}</b></td>
+					{% else %}
+						{% if partido.golesEquipo2 == -1 %}
+							<td>-</td>
+						{% else %}
+							<td>{{ partido.golesEquipo2 }}</td>
+						{% endif %} 
+						<td>{{ partido.equipo2 }}</td>
+					{% endif %}					
+					
+					
+				  </tr>
+				  {% endfor %}
+				  </tbody>
+				</table>
+				{% else %}
+				<h3>No hay Partidos Cargdos para este Equipo</h3>
 			{% endif %} 
 	  </div>
 	</div>

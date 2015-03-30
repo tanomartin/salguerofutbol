@@ -40,7 +40,7 @@
 	$whereIdIn = substr($whereIdIn,0,-1);
 
 	$oAmistosos = new Amistosos();
-	$amistosos = $oAmistosos -> getByIdEquipo($whereIdIn);
+	$amistosos = $oAmistosos -> getByIdEquipoNoJugados($whereIdIn);
 
 	// Cargo la plantilla
 	$twig->display('estadisticasProximafecha.html',array("torneosZonas" => $torneosZonas, "idTorneoActivo" => $_GET['idTorneoActivo'], "partidos" => $partidos, "zona" => $zona[0], "fecha" => $fechas[0], "amistosos" => $amistosos));

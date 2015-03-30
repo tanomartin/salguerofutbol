@@ -215,10 +215,10 @@ class Fixture {
 
 	function getByEquipo($idTorneoZona,$idEquipo){
 		$db = new Db();
-       $query = "Select  x.* ,e1.nombre as equipo1,e2.nombre as equipo2
-		          from partidos x, fechas f,
-				  equipos e1, equipos e2 
+       $query = "Select  x.* ,e1.nombre as equipo1,e2.nombre as equipo2, DATE_FORMAT(x.fechaPartido, '%d/%m/%Y') as fechaPartidoFormato, s.nombre as sede, f.nombre as nombreFecha
+		          from partidos x, fechas f, sedes s, equipos e1, equipos e2 
 				  where x.idFecha = f.id and
+				  x.idSede = s.id and
   				  x.idEquipo1 = e1.id and
 				  x.idEquipo2 = e2.id and 
 				  (x.idEquipo1 = ".$idEquipo." or x.idEquipo2 = ".$idEquipo.")   and 
@@ -250,69 +250,6 @@ class Fixture {
 		$db->close();
 		return $datos;
 	}
-	
-	/*function juegaEstaFecha( $id_equipo1="", $id_equipo2="" , $idTorneoCat = "", $idFecha = "") {
-		
-		$db = new Db();
-	
-		$query = "SELECT count(*) as cantidad FROM partidos p,  ga_fechas f where p.idEquipo1 = $id_equipo1 and p.idEquipo2 = $id_equipo2 and p.idFecha = f.id  and p.idFecha = $idFecha and f.idTorneoCat = $idTorneoCat;";
-		
-		$res = $db->getRow($query); 
-	
-		$db->close();
-		
-		if($res->cantidad == 0) {
-			return false;
-		} else {
-			return true;
-		}
-		
-	}
-	
-	function getByFechaPartidoSede($fechaPartido, $idSede){
-
-	   $db = new Db();
-
-       $query = "Select  
-	   				x.id as idPartido,
-	   				x.horaPartido, 
-					f.nombre as nombreFecha, 
-					e1.nombre as equipo1,
-					e1.id as id1,
-					e2.nombre as equipo2,
-					e2.id as id2,
-					x.cancha as cancha,
-					t.nombre as torneo, 
-					c.nombrePagina as categoria,
-					tc.id_padre as idzona
-		          from 
-				    partidos x, 
-					ga_fechas f, 
-					ga_torneos_categorias tc, 
-					ga_torneos t, 
-					ga_equipos e1, 
-					ga_equipos e2, 
-					ga_categorias c
-				  where 
-				    x.fechaPartido = '$fechaPartido' and 
-				    x.idSede = $idSede and
-				    x.idFecha = f.id and
-  				    x.idEquipo1 = e1.id and
-				    x.idEquipo2 = e2.id and 
-				    f.idTorneoCat = tc.id and
-				    tc.id_torneo = t.id and
-				    tc.id_categoria = c.id
-				  order 
-				    by x.horaPartido ASC";
-
-		$datos = $db->getResults($query, ARRAY_A); 
-
-		$db->close();
-
-		return $datos;	
-
-	}*/
-
 }
 
 ?>
