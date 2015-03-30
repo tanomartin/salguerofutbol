@@ -12,7 +12,7 @@
 						<a class="dropdown-toggle" data-toggle="dropdown" href="#">{{ torneozona.torneo.nombre }} <span class="caret"></span></a>
 						<ul class="dropdown-menu  multi-level">
 							  <li class="dropdown-submenu">
-								<a href="#" class="dropdown-toggle" data-toggle="dropdown">Tabla de posiciones </a>
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown">Posiciones </a>
 									<ul class="dropdown-menu">
 										{% for torenoZona in torneozona.zonas %} 
 											<li><a href="estadisticasPosiciones.php?idTorneoZonaActiva={{ torenoZona.id }}&idZonaActiva={{ torenoZona.id_zona }}&idTorneoActivo={{ torneozona.torneo.id }}"> {{ torenoZona.nombreCorto }} </a></li>
@@ -30,22 +30,14 @@
 									</ul>
 							  </li>
 							  <li class="dropdown-submenu">
-								<a href="#" class="dropdown-toggle" data-toggle="dropdown">Horarios proxima fecha </a>
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown">Proxima fecha </a>
 									<ul class="dropdown-menu">
 										{% for torenoZona in torneozona.zonas %} 
 											<li><a href="estadisticasProximafecha.php?idTorneoZonaActiva={{ torenoZona.id }}&idZonaActiva={{ torenoZona.id_zona }}&idTorneoActivo={{ torneozona.torneo.id }}"> {{ torenoZona.nombreCorto }} </a></li>
 										{% endfor %}
 									</ul>
 							  </li>
-							  <li> <a href="estadisticasPlayOff.php?idTorneoActivo={{ torneozona.torneo.id }}"> Play Off </a> </li>
-							  <!-- <li class="dropdown-submenu">
-								<a href="#" class="dropdown-toggle" data-toggle="dropdown">Resultados ultima fecha </a>
-									<ul class="dropdown-menu">
-										{% for torenoZona in torneozona.zonas %} 
-											<li><a href="estadisticasUltimafecha.php?idTorneoZonaActiva={{ torenoZona.id }}&idZonaActiva={{ torenoZona.id_zona }}&idTorneoActivo={{ torneozona.torneo.id }}"> {{ torenoZona.nombreCorto }} </a></li>
-										{% endfor %}
-									</ul>
-							  </li> -->
+							  <li> <a href="estadisticasPlayOff.php?idTorneoActivo={{ torneozona.torneo.id }}"> Play-Off </a> </li>
 						</ul>
 				 	</li>
 			 {% endfor %}
