@@ -16,8 +16,6 @@
 	
 	}
 
-	var_dump($datos);
-
     $oFCKeditor = new FCKeditor( "texto" ) ;
     $oFCKeditor -> BasePath = '../_js/FCKeditor/' ;
 	$oFCKeditor -> Height = 250 ;

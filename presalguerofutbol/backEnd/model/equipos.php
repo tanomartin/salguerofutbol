@@ -45,7 +45,6 @@ class Equipos {
 				"'".$this->nombre."',".				
 				"'".$this->descuento_puntos."',".				
 				"'".$this->descripcion."')";  
-		print($query);
 		$this->id = $db->query($query); 
 		if(is_uploaded_file($_FILES['foto']['tmp_name'])) {
 			$path_parts = pathinfo($_FILES["foto"]["name"]);
@@ -55,7 +54,6 @@ class Equipos {
 			$query = "update equipos set foto = '". $name."'
 					  where id = ".$this->id ;
 			$db->query($query); 
-			print($query);
 		}
 		$db->close();
 	}
@@ -139,7 +137,7 @@ class Equipos {
 		if (trim($filtros["ftorneo"]) != "")		 
 			$query.= " and  t.nombre  like '%".strtoupper($filtros["ftorneo"])."%'";		  
 		if (trim($filtros["fcategoria"]) != "")		 
-			$query.= " and  c.nombreLargo like '%".strtoupper($filtros["fcategoria"])."%'";		  
+			$query.= " and  z.nombreCorto like '%".strtoupper($filtros["fcategoria"])."%'";		  
 		$query.= " order by  $orden $dir LIMIT $inicio,$cant";
 		$datos = $db->getResults($query, ARRAY_A); 
 		$cant_reg = $db->getResults("SELECT FOUND_ROWS() cant", ARRAY_A); 
