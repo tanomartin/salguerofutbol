@@ -137,7 +137,7 @@ class Fechas {
 		if (trim($filtros["ftorneo"]) != "")		 
 			$query.= " and  t.nombre  like '%".strtoupper($filtros["ftorneo"])."%'";		  
 		if (trim($filtros["fcategoria"]) != "")		 
-			$query.= " and  z.nombreLargo like '%".strtoupper($filtros["fcategoria"])."%'";		  
+			$query.= " and  z.nombreCorto like '%".strtoupper($filtros["fcategoria"])."%'";		  
 		$query.= " order by e.fechaIni DESC, e.fechaFin DESC  LIMIT $inicio,$cant";
 		$datos = $db->getResults($query, ARRAY_A); 
 		$cant_reg = $db->getResults("SELECT FOUND_ROWS() cant", ARRAY_A); 
