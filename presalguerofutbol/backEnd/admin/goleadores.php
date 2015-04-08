@@ -164,7 +164,7 @@
                   </tr>
                   <? if (count($datos) == 0) { ?>
                   <tr>
-                    <td colspan="5" align="center">No existen Goleadores </td>
+                    <td colspan="6" align="center">No existen Goleadores </td>
                   </tr>
                   <? } else { 
 				 
