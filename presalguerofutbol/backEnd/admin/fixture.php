@@ -25,6 +25,9 @@
 			$oAmistosos = new Amistosos();
 			$oAmistosos->set($data);
 			$existeAmistoso = $oAmistosos->existePrevio();
+			//Para elminar el control para la precarga
+			//$existeAmistoso = 0;
+			//$existePartido = 0;
 			
 			if ($existeAmistoso || $existePartido) {
 				$errorExiste = 1;
