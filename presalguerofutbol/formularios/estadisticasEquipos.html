@@ -84,9 +84,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	
 	<div class="clearfix">
 	  <div class="copy">
-			<h2> {{ zona.nombreCorto }}</h2>
-			<h4> {{ zona.nombreLargo }}</h4>
-			<h5> {{ zona.nombrePagina }}</h5>
+			<h2> {{ zona.nombreCorto | raw  }}</h2>
+			<h4> {{ zona.nombreLargo | raw  }}</h4>
+			<h5> {{ zona.nombrePagina | raw  }}</h5>
 			{% if equipos|length > 0 %}
 			  	<h3> Equipos </h3><br>
 				  {% for equipo in equipos %}
