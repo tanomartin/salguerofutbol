@@ -84,6 +84,17 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	
 	<div class="clearfix">
 	  <div class="copy">
+	  	<h1> Equipos </h1>
+			{% for torneozona in torneosZonas %} 
+				{% if torneozona.torneo.id == idTorneoActivo %} 
+					<h3> {{ torneozona.torneo.nombre | raw  }}</h3>
+					{% for torenoZona in torneozona.zonas %} 
+						<a href="estadisticasEquipos.php?idTorneoZonaActiva={{ torenoZona.id }}&idZonaActiva={{ torenoZona.id_zona }}&idTorneoActivo={{ torneozona.torneo.id }}"><button type="button" class="btn btn-default">{{ torenoZona.nombreCorto }}</button></a>
+					{% endfor %}
+				{% endif %}
+			{% endfor %}
+			
+		{% if zona != null %}
 			<h2> {{ zona.nombreCorto | raw  }}</h2>
 			<h4> {{ zona.nombreLargo | raw  }}</h4>
 			<h5> {{ zona.nombrePagina | raw  }}</h5>
@@ -103,6 +114,10 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 			{% else %}
 				<h3> No hay Equipos en Esta Zona</h3>
 			{% endif %} 
+		{% else %}
+			<h4>Selecciones una Zona</h4>
+		{% endif %} 
+		
 	  </div>
 	</div>
 	

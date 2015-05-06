@@ -84,6 +84,17 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	
 	<div class="clearfix">
 	  <div class="copy">
+	  	<h1> Proxima Fecha </h1>
+			{% for torneozona in torneosZonas %} 
+				{% if torneozona.torneo.id == idTorneoActivo %} 
+					<h3> {{ torneozona.torneo.nombre | raw  }}</h3>
+					{% for torenoZona in torneozona.zonas %} 
+						<a href="estadisticasProximafecha.php?idTorneoZonaActiva={{ torenoZona.id }}&idZonaActiva={{ torenoZona.id_zona }}&idTorneoActivo={{ torneozona.torneo.id }}"><button type="button" class="btn btn-default">{{ torenoZona.nombreCorto }}</button></a>
+					{% endfor %}
+				{% endif %}
+			{% endfor %}
+			
+	{% if zona != null %}
 			<h2> {{ zona.nombreCorto | raw  }}</h2>
 			<h4> {{ zona.nombreLargo | raw }}</h4>
 			<h5> {{ zona.nombrePagina | raw  }}</h5>
@@ -117,12 +128,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				{% else %}
 				<h3> No hay Fecha Programada Por el Momento</h3>
 			{% endif %} 
-	  </div>
-	</div>
-	
-	{% if amistosos|length > 0 %}
-	<div class="clearfix">
-	  <div class="copy">
+		{% if amistosos|length > 0 %}
 			  	<h3> Proximos Amistosos </h3>
 				<table border="1" cellpadding="0" cellspacing="0" width="800" align="center">
 				  <thead>
@@ -148,9 +154,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				  {% endfor %}
 				  </tbody>
 				</table>
-	  </div>
-	</div>
+		{% endif %} 
+	{% else %}
+		<h4>Selecciones una Zona</h4>
 	{% endif %} 
+ </div>
+</div>
 	
 	<div class="footer">
 	  <div class="container">

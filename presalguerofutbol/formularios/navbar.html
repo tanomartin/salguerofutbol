@@ -10,33 +10,12 @@
 					<li class="dropdown">
 				{% endif %} 
 						<a class="dropdown-toggle" data-toggle="dropdown" href="#">{{ torneozona.torneo.nombre }} <span class="caret"></span></a>
-						<ul class="dropdown-menu  multi-level">
-							  <li class="dropdown-submenu">
-								<a href="#" class="dropdown-toggle" data-toggle="dropdown">Posiciones </a>
-									<ul class="dropdown-menu">
-										{% for torenoZona in torneozona.zonas %} 
-											<li><a href="estadisticasPosiciones.php?idTorneoZonaActiva={{ torenoZona.id }}&idZonaActiva={{ torenoZona.id_zona }}&idTorneoActivo={{ torneozona.torneo.id }}"> {{ torenoZona.nombreCorto }} </a></li>
-										{% endfor %}
-									</ul>
-							  </li>
+						<ul class="dropdown-menu">
+							  <li> <a href="estadisticasPosiciones.php?idTorneoActivo={{ torneozona.torneo.id }}"> Posiciones </a> </li>
 							  <li> <a href="estadisticasGoleadores.php?idTorneoActivo={{ torneozona.torneo.id }}"> Goleadores </a> </li>
 							  <li> <a href="estadisticasExpulsados.php?idTorneoActivo={{ torneozona.torneo.id }}"> Sanciones </a> </li>
-							  <li class="dropdown-submenu">
-								<a href="#" class="dropdown-toggle" data-toggle="dropdown">Equipos </a>
-									<ul class="dropdown-menu">
-										{% for torenoZona in torneozona.zonas %} 
-											<li><a href="estadisticasEquipos.php?idTorneoZonaActiva={{ torenoZona.id }}&idZonaActiva={{ torenoZona.id_zona }}&idTorneoActivo={{ torneozona.torneo.id }}"> {{ torenoZona.nombreCorto }} </a></li>
-										{% endfor %}
-									</ul>
-							  </li>
-							  <li class="dropdown-submenu">
-								<a href="#" class="dropdown-toggle" data-toggle="dropdown">Proxima fecha </a>
-									<ul class="dropdown-menu">
-										{% for torenoZona in torneozona.zonas %} 
-											<li><a href="estadisticasProximafecha.php?idTorneoZonaActiva={{ torenoZona.id }}&idZonaActiva={{ torenoZona.id_zona }}&idTorneoActivo={{ torneozona.torneo.id }}"> {{ torenoZona.nombreCorto }} </a></li>
-										{% endfor %}
-									</ul>
-							  </li>
+							  <li> <a href="estadisticasEquipos.php?idTorneoActivo={{ torneozona.torneo.id }}"> Equipos </a> </li>
+							  <li> <a href="estadisticasProximafecha.php?idTorneoActivo={{ torneozona.torneo.id }}"> Proxima fecha </a> </li>
 							  <li> <a href="estadisticasPlayOff.php?idTorneoActivo={{ torneozona.torneo.id }}"> Play-Off </a> </li>
 						</ul>
 				 	</li>
