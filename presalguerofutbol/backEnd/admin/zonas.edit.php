@@ -41,7 +41,7 @@
     </div>
   </div>
   <!-- Header -->
-  <div id="container">
+  <div id="container">	
     <div id="main">
       <div class="inside">
         <? include("path.php"); ?>
@@ -69,11 +69,11 @@
                       <tr class="odd">
                         <td class="col_0 col_first"><label for="nombre">Nombre Corto</label>
                           <span class="mandatory">*</span></td>
-                        <td class="col_1 col_last"><input name="nombreCorto" id="nombreCorto" class="required text" maxlength="20" size="20" type="text" value="<?=$datos[0]["nombreCorto"]?>"></td>
+                        <td class="col_1 col_last"><input name="nombreCorto" type="text" class="required text" id="nombreCorto" value="<?=$datos[0]["nombreCorto"]?>" size="50" maxlength="120"></td>
                       </tr>
                       <tr class="even">
                         <td class="col_0 col_first"><label for="id_opcion">Bajada</label></td>
-                        <td class="col_1 col_last"><input name="nombrePagina" id="nombrePagina" maxlength="40"  size="40" type="text" value="<?=$datos[0]["nombrePagina"]?>"></td>
+                        <td class="col_1 col_last"><input name="nombrePagina" type="text" id="nombrePagina" value="<?=$datos[0]["nombrePagina"]?>"  size="50" maxlength="120"></td>
                       </tr>
                       <tr class="even">
                         <td class="col_0 col_first"><label for="id_opcion">Descripción</label></td>
