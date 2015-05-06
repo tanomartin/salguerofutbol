@@ -156,7 +156,7 @@ class Fixture {
 				  left join  zonas z on  tz.id_zona = z.id 
 				  where 1 = 1 ";
 		if (trim($filtros["fnombre"]) != "")		 
-			$query.= " and e1.nombre like '%".strtoupper($filtros["fnombre"])."%'";		  
+			$query.= " and ((e1.nombre like '%".strtoupper($filtros["fnombre"])."%') or (e2.nombre like '%".strtoupper($filtros["fnombre"])."%'))";		  
 		if (trim($filtros["ftorneo"]) != "")		 
 			$query.= " and  t.nombre  like '%".strtoupper($filtros["ftorneo"])."%'";		  
 		if (trim($filtros["fcategoria"]) != "")		 
