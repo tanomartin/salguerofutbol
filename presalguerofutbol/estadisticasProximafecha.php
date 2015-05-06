@@ -20,27 +20,29 @@
 		}
 	}
 	
-	$oFechas = new Fechas();
-	$fechas = $oFechas -> getFechaProxima($_GET['idTorneoZonaActiva']);
+	if (isset($_GET['idTorneoZonaActiva']) && isset($_GET['idZonaActiva'])) {
+		$oFechas = new Fechas();
+		$fechas = $oFechas -> getFechaProxima($_GET['idTorneoZonaActiva']);
+		
+		$oPartidos = new Fixture();
+		$partidos = $oPartidos -> getByFecha($fechas[0]['id']);
+		
+		$oZonas = new Zonas();
+		$zona = $oZonas->get($_GET['idZonaActiva']);
 	
-	$oPartidos = new Fixture();
-	$partidos = $oPartidos -> getByFecha($fechas[0]['id']);
-	
-	$oZonas = new Zonas();
-	$zona = $oZonas->get($_GET['idZonaActiva']);
-
-	$oEquipos = new Equipos();
-	$arryaEquipos = $oEquipos->getTorneoCat($_GET['idTorneoZonaActiva']);
-	$index = 0;
-	if ($arryaEquipos != NULL) {
-		foreach($arryaEquipos as $equipo) {
-			$whereIdIn .= $equipo['id'].",";
+		$oEquipos = new Equipos();
+		$arryaEquipos = $oEquipos->getTorneoCat($_GET['idTorneoZonaActiva']);
+		$index = 0;
+		if ($arryaEquipos != NULL) {
+			foreach($arryaEquipos as $equipo) {
+				$whereIdIn .= $equipo['id'].",";
+			}
 		}
+		$whereIdIn = substr($whereIdIn,0,-1);
+	
+		$oAmistosos = new Amistosos();
+		$amistosos = $oAmistosos -> getByIdEquipoNoJugados($whereIdIn);
 	}
-	$whereIdIn = substr($whereIdIn,0,-1);
-
-	$oAmistosos = new Amistosos();
-	$amistosos = $oAmistosos -> getByIdEquipoNoJugados($whereIdIn);
 
 	// Cargo la plantilla
 	$twig->display('estadisticasProximafecha.html',array("torneosZonas" => $torneosZonas, "idTorneoActivo" => $_GET['idTorneoActivo'], "partidos" => $partidos, "zona" => $zona[0], "fecha" => $fechas[0], "amistosos" => $amistosos));

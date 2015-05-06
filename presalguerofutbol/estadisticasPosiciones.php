@@ -18,19 +18,20 @@ if ($torneos != NULL) {
 		$torneosZonas[$torneo["id"]] = array("torneo" => $torneo, "zonas" => $zonas);
 	}
 }
-
-$cruce = array();
-$oCruces = new Cruces();
-$cruce = $oCruces->armarCruces($_GET['idTorneoZonaActiva']);
-
-$oEquipo = new Equipos();
-$equiposTorneo = $oEquipo -> getTorneoCat($_GET['idTorneoZonaActiva']);
-
-$oZonas = new Zonas();
-$zona = $oZonas->get($_GET['idZonaActiva']);
-
-$oPosiciones = new Posiciones();
-$tabla = $oPosiciones->armarTabla($_GET['idTorneoZonaActiva']);
+if (isset($_GET['idTorneoZonaActiva']) && isset($_GET['idZonaActiva'])) {
+	$cruce = array();
+	$oCruces = new Cruces();
+	$cruce = $oCruces->armarCruces($_GET['idTorneoZonaActiva']);
+	
+	$oEquipo = new Equipos();
+	$equiposTorneo = $oEquipo -> getTorneoCat($_GET['idTorneoZonaActiva']);
+	
+	$oZonas = new Zonas();
+	$zona = $oZonas->get($_GET['idZonaActiva']);
+	
+	$oPosiciones = new Posiciones();
+	$tabla = $oPosiciones->armarTabla($_GET['idTorneoZonaActiva']);
+}
 
 // Cargo la plantilla
 $twig->display('estadisticasPosiciones.html',array("torneosZonas" => $torneosZonas, "idTorneoActivo" => $_GET['idTorneoActivo'], "tabla" => $tabla, "zona" => $zona[0], "cruces" => $cruce, "equipos" => $equiposTorneo));

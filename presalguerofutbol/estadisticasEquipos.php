@@ -17,11 +17,13 @@
 		}
 	}
 	
-	$oZonas = new Zonas();
-	$zona = $oZonas->get($_GET['idZonaActiva']);
-
-	$oEquipos = new Equipos();
-	$equipos = $oEquipos->getTorneoCat($_GET['idTorneoZonaActiva']);
+	if (isset($_GET['idTorneoZonaActiva']) && isset($_GET['idZonaActiva'])) {
+		$oZonas = new Zonas();
+		$zona = $oZonas->get($_GET['idZonaActiva']);
+	
+		$oEquipos = new Equipos();
+		$equipos = $oEquipos->getTorneoCat($_GET['idTorneoZonaActiva']);
+	}
 
 	// Cargo la plantilla
 	$twig->display('estadisticasEquipos.html',array("torneosZonas" => $torneosZonas, "idTorneoZonaActivo" => $_GET['idTorneoZonaActiva'], "idTorneoActivo" => $_GET['idTorneoActivo'], "equipos" => $equipos, "zona" => $zona[0]));
