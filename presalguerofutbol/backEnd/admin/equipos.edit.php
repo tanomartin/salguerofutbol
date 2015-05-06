@@ -129,16 +129,14 @@
 					    <td class="col_1 col_last"><input name="descuento_puntos" type="text" id="descuento_puntos" value="<?php echo $datos[0]["descuento_puntos"]; ?>" class="validate-digits" size="3"  <?= $disabled ?>/>                        </td>
 				      </tr>
 					  <tr class="odd">
-                        <td class="col_0 col_first"><label for="nombre">Foto </label>
-                            <span class="mandatory">*</span></td>
+                        <td class="col_0 col_first"><label for="nombre">Foto </label></td>
 					    <td class="col_1 col_last"><input name="foto" id="foto" class="" maxlength="50" type="file"  <?= $disabled ?> />
 					        <? if ($datos[0]["foto"] != "" ) { ?>
 					      <a href="../fotos_equipos/<?= $datos[0]["foto"] ?>" target="_blank"> Imagen</a>
                             <? } ?>                        </td>
 				      </tr>
 					  <tr class="even">
-                        <td class="col_0 col_first"><label for="nombre">Descripción</label>
-                            <span class="mandatory">*</span></td>
+                        <td class="col_0 col_first"><label for="nombre">Descripción</label></td>
 					    <td class="col_1 col_last"><?= $oFCKeditor -> Create( ) ; ?></td>
 				      </tr>
                     </tbody>
