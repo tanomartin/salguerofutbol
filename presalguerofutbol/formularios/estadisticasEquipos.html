@@ -99,7 +99,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 			<h4> {{ zona.nombreLargo | raw  }}</h4>
 			<h5> {{ zona.nombrePagina | raw  }}</h5>
 			{% if equipos|length > 0 %}
-			  	<h3> Equipos </h3><br>
+				<br>
 				  {% for equipo in equipos %}
 				 		<h4>{{ equipo.nombre }}</h4>
 						{% if equipo.foto != '' %}
