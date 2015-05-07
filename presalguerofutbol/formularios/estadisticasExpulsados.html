@@ -89,7 +89,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		  {% if expulsados|length > 0 %}
 			<table class="table table-bordered" style="width:740px" align="center">
 			  <thead>
-				<tr> 
+				<tr>
 				  <th style="text-align:center">Nombre</th>
 				  <th style="text-align:center">Equipo</th>
 				  <th style="text-align:center">Sancion</th>
@@ -97,7 +97,11 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 			  </thead>
 			  <tbody>
 			  {% for expulsado in expulsados %}
-			  <tr>
+			 	 {% if expulsado.sancion == 'EXPULSADO' or expulsado.sancion == 'EXPULSADOS' %}
+			 		 <tr style="color:#FF0000">
+				 {% else %}
+				     <tr style="color:#000000">
+				 {% endif %}
 				<td>{{ expulsado.nombre }}</td>
 				<td>{{ expulsado.equipo }}</td>
 				<td>{{ expulsado.sancion }}</td>
