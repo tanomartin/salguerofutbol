@@ -42,7 +42,7 @@ class Expulsados {
 		if ($id != "") {
 			$query .= " and c.id = '$id' ";
 		}
-		$query .= " order by c.nombre DESC";
+		$query .= " order by c.nombre ASC";
 		$res = $db->getResults($query, ARRAY_A); 
 		$db->close();
 		return $res;
@@ -89,7 +89,7 @@ class Expulsados {
 		$query = "Select SQL_CALC_FOUND_ROWS  e.nombre as equipo, DATE_FORMAT(c.fechaSancion, '%d/%m/%Y') as fechaSancionFormat, t.nombre as torneo, c.* from expulsados c, equipos e, torneos t where c.idEquipo = e.id and c.idTorneo = t.id ";
 		if (trim($filtros["fnombre"]) != "")		 
 			$query.= " and c.nombre like '%".strtoupper($_REQUEST["fnombre"])."%'";		  
-		$query.= "ORDER BY c.nombre DESC LIMIT $inicio,$cant";
+		$query.= "ORDER BY c.nombre ASC LIMIT $inicio,$cant";
 		$datos = $db->getResults($query, ARRAY_A); 
 		$cant_reg = $db->getResults("SELECT FOUND_ROWS() cant", ARRAY_A); 
 		$total = ceil( $cant_reg[0]["cant"] / $cant );
