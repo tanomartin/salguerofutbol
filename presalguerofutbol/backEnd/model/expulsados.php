@@ -7,16 +7,18 @@ class Expulsados {
 	var $nombre;
 	var $idTorneo;
 	var $idEquipo;
+	var $fechaSancion;
 	var $sancion;
 	
 	function Expulsados($id="") {
 		if ($id != "") {
 			$expusaldos = $this->get($id);
-			$this->id = $goleadores[0]["id"]; 
-			$this->nombre = $goleadores[0]["nombre"];
-			$this->idTorneo = $goleadores[0]["idTorneo"];
-			$this->idEquipo = $goleadores[0]["idEquipo"];
-			$this->sancion = $goleadores[0]["sancion"];
+			$this->id = $expusaldos[0]["id"]; 
+			$this->nombre = $expusaldos[0]["nombre"];
+			$this->idTorneo = $expusaldos[0]["idTorneo"];
+			$this->idEquipo = $expusaldos[0]["idEquipo"];
+			$this->fechaSancion = cambiaf_a_mysql($expusaldos[0]["fechaSancion"]);
+			$this->sancion = $expusaldos[0]["sancion"];
 		}
 	}
 	
@@ -25,6 +27,7 @@ class Expulsados {
 		$this->nombre = $valores["nombre"];
 		$this->idTorneo = $valores["idTorneo"];
 		$this->idEquipo = $valores["idEquipo"];
+		$this->fechaSancion = cambiaf_a_mysql($valores["fechaSancion"]);
 		$this->sancion = $valores["sancion"];
 	}
 	
@@ -35,7 +38,7 @@ class Expulsados {
 	
 	function get($id="") {
 		$db = new Db();
-		$query = "Select c.*, e.nombre as equipo, t.nombre as torneo from expulsados c, equipos e, torneos t where c.idEquipo = e.id and c.idTorneo = t.id" ;
+		$query = "Select c.*, DATE_FORMAT(c.fechaSancion, '%d/%m/%Y') as fechaSancionFormat , e.nombre as equipo, t.nombre as torneo from expulsados c, equipos e, torneos t where c.idEquipo = e.id and c.idTorneo = t.id" ;
 		if ($id != "") {
 			$query .= " and c.id = '$id' ";
 		}
@@ -47,7 +50,7 @@ class Expulsados {
 	
 	function getByTorneo($idTorneo="") {
 		$db = new Db();
-		$query = "Select c.*, e.nombre as equipo, t.nombre as torneo from expulsados c, equipos e, torneos t where c.idEquipo = e.id and c.idTorneo = t.id and t.id = '$idTorneo' order by c.nombre ASC";
+		$query = "Select c.*, DATE_FORMAT(c.fechaSancion, '%d/%m/%Y') as fechaSancionFormat, e.nombre as equipo, t.nombre as torneo from expulsados c, equipos e, torneos t where c.idEquipo = e.id and c.idTorneo = t.id and t.id = '$idTorneo' order by c.nombre ASC";
 		$res = $db->getResults($query, ARRAY_A); 
 		$db->close();
 		return $res;
@@ -55,7 +58,7 @@ class Expulsados {
 	
 	function agregar() {
 		$db = new Db();	
-		$query = "insert into expulsados(nombre, idTorneo, idEquipo, sancion) values ('".$this->nombre."','".$this->idTorneo."','".$this->idEquipo."','".$this->sancion."')" ;
+		$query = "insert into expulsados(nombre, idTorneo, idEquipo, fechaSancion, sancion) values ('".$this->nombre."','".$this->idTorneo."','".$this->idEquipo."','".$this->fechaSancion."','".$this->sancion."')" ;
 		$db->query($query); 
 		$db->close();
 	}
@@ -73,6 +76,8 @@ class Expulsados {
 		          nombre  = '". $this->nombre."',
 				  idTorneo  = '". $this->idTorneo."',
 				  idEquipo  = '". $this->idEquipo."',
+				  idEquipo  = '". $this->idEquipo."',
+				  fechaSancion  = '". $this->fechaSancion."',
 				  sancion  = '". $this->sancion."'
 				  where id = ".$this->id ;
 		$db->query($query); 
@@ -81,7 +86,7 @@ class Expulsados {
 	
 	function getPaginado($filtros, $inicio, $cant, &$total) {
 		$db = new Db();
-		$query = "Select SQL_CALC_FOUND_ROWS  e.nombre as equipo, t.nombre as torneo, c.* from expulsados c, equipos e, torneos t where c.idEquipo = e.id and c.idTorneo = t.id ";
+		$query = "Select SQL_CALC_FOUND_ROWS  e.nombre as equipo, DATE_FORMAT(c.fechaSancion, '%d/%m/%Y') as fechaSancionFormat, t.nombre as torneo, c.* from expulsados c, equipos e, torneos t where c.idEquipo = e.id and c.idTorneo = t.id ";
 		if (trim($filtros["fnombre"]) != "")		 
 			$query.= " and c.nombre like '%".strtoupper($_REQUEST["fnombre"])."%'";		  
 		$query.= "ORDER BY c.nombre DESC LIMIT $inicio,$cant";

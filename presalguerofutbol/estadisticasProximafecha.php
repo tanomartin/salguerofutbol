@@ -29,22 +29,9 @@
 		
 		$oZonas = new Zonas();
 		$zona = $oZonas->get($_GET['idZonaActiva']);
-	
-		$oEquipos = new Equipos();
-		$arryaEquipos = $oEquipos->getTorneoCat($_GET['idTorneoZonaActiva']);
-		$index = 0;
-		if ($arryaEquipos != NULL) {
-			foreach($arryaEquipos as $equipo) {
-				$whereIdIn .= $equipo['id'].",";
-			}
-		}
-		$whereIdIn = substr($whereIdIn,0,-1);
-	
-		$oAmistosos = new Amistosos();
-		$amistosos = $oAmistosos -> getByIdEquipoNoJugados($whereIdIn);
 	}
 
 	// Cargo la plantilla
-	$twig->display('estadisticasProximafecha.html',array("torneosZonas" => $torneosZonas, "idTorneoActivo" => $_GET['idTorneoActivo'], "partidos" => $partidos, "zona" => $zona[0], "fecha" => $fechas[0], "amistosos" => $amistosos));
+	$twig->display('estadisticasProximafecha.html',array("torneosZonas" => $torneosZonas, "idTorneoActivo" => $_GET['idTorneoActivo'], "partidos" => $partidos, "zona" => $zona[0], "fecha" => $fechas[0]));
 
 ?>

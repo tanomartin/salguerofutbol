@@ -133,7 +133,23 @@ class Amistosos {
 				  left join  sedes s  on x.idSede = s.id
 				  where
 				 (x.idEquipo1 in ($arrayIdEquipo) || x.idEquipo2 in ($arrayIdEquipo)) and x.fechaPartido >= $hoy 
-				 order by fechaPartido DESC, horaPartido DESC";
+				  order by fechaPartido DESC, idsede ASC, horaPartido ASC, cancha ASC";
+		$res = $db->getResults($query, ARRAY_A); 
+		$db->close();
+		return $res;
+	}
+	
+	function getNoJugados() {
+		$hoy = date('Y-m-d');
+		$db = new Db();
+		$query = "Select SQL_CALC_FOUND_ROWS  x.*, DATE_FORMAT(x.fechaPartido, '%d/%m/%Y') as fechaPartidoFormato, e1.nombre as equipo1, e2.nombre as equipo2, s.nombre as sede
+		          from amistosos x
+				  left join  equipos e1 on x.idEquipo1 = e1.id 
+				  left join  equipos e2  on x.idEquipo2 = e2.id
+				  left join  sedes s  on x.idSede = s.id
+				  where
+				  x.fechaPartido >= $hoy 
+				  order by fechaPartido DESC, idsede ASC, horaPartido ASC, cancha ASC";
 		$res = $db->getResults($query, ARRAY_A); 
 		$db->close();
 		return $res;

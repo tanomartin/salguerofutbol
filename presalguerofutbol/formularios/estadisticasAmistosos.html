@@ -84,34 +84,35 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
 <div class="clearfix">
   <div class="copy">
-  		<h3> Sanciones </h3>
-		<h3> {{ torneo.nombre | raw  }}</h3>
-		  {% if expulsados|length > 0 %}
-			<table class="table table-bordered" style="width:740px" align="center">
-			  <thead>
-				<tr>
-				  <th style="text-align:center">Nombre</th>
-				  <th style="text-align:center">Equipo</th>
-				  <th style="text-align:center">Fecha Sancion</th>
-				  <th style="text-align:center">Sancion</th>
-				</tr>
-			  </thead>
-			  <tbody>
-			  {% for expulsado in expulsados %}
-			 	 {% if expulsado.sancion == 'EXPULSADO' or expulsado.sancion == 'EXPULSADOS' %}
-			 		 <tr style="color:#FF0000">
-				 {% else %}
-				     <tr style="color:#000000">
-				 {% endif %}
-				<td>{{ expulsado.nombre }}</td>
-				<td>{{ expulsado.equipo }}</td>
-				<td>{{ expulsado.fechaSancionFormat }}</td>
-				<td>{{ expulsado.sancion }}</td>
-			  </tr>
-			  {% endfor %}
-			  </tbody>
-			</table>
-		  {% endif %} 
+		{% if amistosos|length > 0 %}
+			  	<h2> Proximos Amistosos </h2>
+				<table class="table table-bordered" style="width:800px" align="center">
+				  <thead>
+					<tr> 
+					  <th style="text-align:center">Dia</th>
+					  <th style="text-align:center">Hora</th>
+					  <th style="text-align:center">Sede</th>
+					  <th style="text-align:center">Cancha</th>
+					  <th style="text-align:center">Local</th>
+					  <th style="text-align:center">Visitante</th>
+					</tr>
+				  </thead>
+				  <tbody>
+				  {% for amistoso in amistosos %}
+				  <tr>
+				  	<td>{{ amistoso.fechaPartidoFormato }}</td>
+					<td>{{ amistoso.horaPartido }}</td>
+					<td>{{ amistoso.sede }}</td>
+					<td>{{ amistoso.cancha }}</td>
+					<td>{{ amistoso.equipo1 }}</td>
+					<td>{{ amistoso.equipo2 }}</td>
+				  </tr>
+				  {% endfor %}
+				  </tbody>
+				</table>
+		{% else %} 
+			<h3> No Existen Amistosos Programados </h3>
+		{% endif %} 
   </div>
 </div>
 <div class="footer">

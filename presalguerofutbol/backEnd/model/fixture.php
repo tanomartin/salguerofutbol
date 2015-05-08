@@ -178,7 +178,7 @@ class Fixture {
 				  x.idEquipo1 = e1.id and
 				  x.idEquipo2 = e2.id
 				  and f.id=".$fecha;
-		$query.= " order by fechaPartido ASC, horaPartido ASC";
+		$query.= " order by fechaPartido ASC, idsede ASC, horaPartido ASC, cancha ASC";
 		$datos = $db->getResults($query, ARRAY_A); 
 		$db->close();
 		return $datos;	

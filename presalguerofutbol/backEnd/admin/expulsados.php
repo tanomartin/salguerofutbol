@@ -1,6 +1,7 @@
 <?	include_once "include/config.inc.php";
 	include_once "../model/expulsados.php";
 	include_once "include/control_session.php";
+	include_once "include/fechas.php";
 
 	switch ($_POST["accion"]) {
 		case "editar":
@@ -105,7 +106,7 @@
             <div class="mod_listing ce_table listing block" id="partnerlist">
               <div >
                 <form name="frm_busqueda" id="frm_busqueda" action="<?=$_SERVER['PHP_SELF']?>" method="post">
-                  <div class="formbody"> Nombre: <input name="fnombre" type="text" style="width:50px" value="<?=$_POST["fnombre"]?>"  />
+                  <div class="formbody"> Nombre: <input name="fnombre" type="text" style="width:150px" value="<?=$_POST["fnombre"]?>"  />
                     <input type="hidden" name="_pag" value="<?=$pag?>" />
                     <input type="hidden" name="id" value="<?=$_POST["id"]?>" />
                     <input type="hidden" name="accion" value="" />
@@ -155,12 +156,13 @@
                     <th >Nombre</th>
 					<th >Torneo</th>
 					<th >Equipo</th>
+					<th >Fecha Sancion</th>
 					<th >Sansion</th>
                     <th width="10%">Opciones</th>
                   </tr>
                   <? if (count($datos) == 0) { ?>
                   <tr>
-                    <td colspan="6" align="center">No existen Expulsados </td>
+                    <td colspan="7" align="center">No existen Expulsados </td>
                   </tr>
                   <? } else { 
 				 
@@ -172,6 +174,7 @@
                     <td align="left"><?=$datos[$i]["nombre"]?></td>
 					<td align="left"><?=$datos[$i]["torneo"]?></td>
 				    <td align="left"><?=$datos[$i]["equipo"]?></td>
+					<td align="left"><?=$datos[$i]["fechaSancionFormat"]?></td>
 					<td align="left"><?=$datos[$i]["sancion"]?></td>
                     <td nowrap><a href="javascript:editar(<?=$datos[$i]["id"]?>);"> <img border="0" src="images/icono-editar.gif" alt="editar" title="editar" /></a> <a href="javascript:borrar(<?=$datos[$i]["id"]?>);"><img border="0" src="images/icono-eliminar.gif" alt="eliminar" title="eliminar" /></a> </td>
                   </tr>

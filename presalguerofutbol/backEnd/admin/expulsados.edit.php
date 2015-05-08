@@ -2,6 +2,7 @@
 	include_once "../model/torneos.php";
 	include_once "../model/equipos.php";
 	include_once "include/control_session.php";
+	include_once "include/fechas.php";
 	
 	$operacion = "Alta";
 
@@ -73,8 +74,7 @@
                         <td class="col_0 col_first"><label for="id_opcion">Nombre</label>
                           <span class="mandatory">*</span></td>
                         <td class="col_1 col_last">
-							<input name="nombre" id="nombre" class="required text" maxlength="100"  size="50" type="text" value="<?=$datos[0]["nombre"]?>">
-						</td>
+							<input name="nombre" id="nombre" class="required text" maxlength="100"  size="50" type="text" value="<?=$datos[0]["nombre"]?>">						</td>
                       </tr>
 					  <tr class="even">
 					   <td class="col_0 col_first"><label for="nombre">Torneo</label>
@@ -85,8 +85,7 @@
                           <?php for($i=0;$i<count($aTorneos);$i++) { ?>
                           <option value="<?php echo $aTorneos[$i]['id'] ?>" <?php if ($datos[0]["idTorneo"] ==   $aTorneos[$i]['id'] ) echo "selected"; ?>><?php echo $aTorneos[$i]['nombre'] ?> </option>
                           <?php } ?>
-                        </select>
-					  </td>
+                        </select>					  </td>
 					  </tr>
                       <tr class="even">
                         <td class="col_0 col_first"><label for="nombre">Equipo </label>
@@ -105,6 +104,15 @@
                          <? } ?>
                           </select>
                           <span id="advice3"> </span> </span> </td>
+                      </tr>
+                      <tr class="even">
+                        <td class="col_0 col_first"><label for="nombre">Fecha Sancion </label>
+                            <span class="mandatory">*</span></td>
+                        <td class="col_1 col_last"><input name="fechaSancion" type="text" id="fechaSancion" value="<?php echo $datos[0]["fechaSancionFormat"] ?>" size="10" readonly="readonly" class="required"/>
+                            <? if($disabled != "disabled") { ?>
+                            <a href="javascript:show_calendar('document.form_alta.fechaSancion', document.form_alta.fechaSancion.value);"> <img src="../_js/calendario2/cal.gif" width="16" height="16" border="0" /> </a>
+                            <? } ?>
+                        </td>
                       </tr>
                       <tr class="even">
                         <td class="col_0 col_first"><label for="label">Sancion </label>
