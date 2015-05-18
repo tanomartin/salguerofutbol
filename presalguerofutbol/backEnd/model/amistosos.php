@@ -132,7 +132,7 @@ class Amistosos {
 				  left join  equipos e2  on x.idEquipo2 = e2.id
 				  left join  sedes s  on x.idSede = s.id
 				  where
-				 (x.idEquipo1 in ($arrayIdEquipo) || x.idEquipo2 in ($arrayIdEquipo)) and x.fechaPartido >= $hoy 
+				 (x.idEquipo1 in ($arrayIdEquipo) || x.idEquipo2 in ($arrayIdEquipo)) and x.fechaPartido >= '$hoy'
 				  order by fechaPartido DESC, idsede ASC, horaPartido ASC, cancha ASC";
 		$res = $db->getResults($query, ARRAY_A); 
 		$db->close();
@@ -148,7 +148,7 @@ class Amistosos {
 				  left join  equipos e2  on x.idEquipo2 = e2.id
 				  left join  sedes s  on x.idSede = s.id
 				  where
-				  x.fechaPartido >= $hoy 
+				  x.fechaPartido >= '$hoy'
 				  order by fechaPartido DESC, idsede ASC, horaPartido ASC, cancha ASC";
 		$res = $db->getResults($query, ARRAY_A); 
 		$db->close();
