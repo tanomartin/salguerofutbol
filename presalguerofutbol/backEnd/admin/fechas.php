@@ -21,10 +21,19 @@
 			$data =   $_POST;
 			$oObj = new Fechas();
 			$oObj->set($data);
-			if($_POST["id"] == "-1") { // Tiene el valor de session_id()
-				$oObj->insertar();
+			$existeFecha = $oObj->existeFecha($_POST["id"]);
+			if (!$existeFecha) {
+				if($_POST["id"] == "-1") { // Tiene el valor de session_id()
+					$oObj->insertar();
+				} else {
+					$oObj->actualizar();
+				}
 			} else {
-				$oObj->actualizar();
+				$errorExiste = 1;
+				$datos[0] = $_POST;
+				include("fechas.edit.php");
+				exit;
+				break;
 			}
 			break;
 

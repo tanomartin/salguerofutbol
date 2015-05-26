@@ -147,6 +147,22 @@ class Fechas {
 		return $datos;	
 	}
 	
+	function existeFecha($idFecha="") {
+		$db = new Db();
+		$query = "select count(*) as cantidad from fechas where 
+		          nombre like '". $this->nombre."' and
+		          idTorneoZona = '". $this->idTorneoZona."' and
+		          id <> '$idFecha'";
+		$res = $db->getRow($query); 
+		//print($query."<br>");
+		$db->close();
+		if($res->cantidad == 0) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+	
 }
 
 ?>

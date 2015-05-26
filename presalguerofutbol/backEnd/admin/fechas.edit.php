@@ -18,6 +18,16 @@
 
 	$oTorneo= new Torneos();
 	$aTorneos = $oTorneo->get();
+	
+	if (isset($errorExiste)) {
+		$error = "No se puede guardar la fecha. Existe una con el mismo nombre en esta zona";
+		if ($_POST["id"] == -1) {
+			$datos[0]['idTorneoZona'] = $datos[0]['idTorneoCat'];
+			$datos[0]['id_torneo'] = $datos[0]['idTorneo'];
+		}
+	} else {
+		$error = "";
+	}
 
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -73,6 +83,8 @@
                 <div class="ce_table">
                   <fieldset>
                   <legend>Datos de la Fecha </legend>
+				  </fieldset>
+				  <div id="error" style="color:#FF0000"><b><?=$error?></b></div>
                   <table summary="Personal data" cellpadding="0" cellspacing="0">
                     <tbody>
                       <tr class="even">
