@@ -1,0 +1,27 @@
+{% block barraNavegacion %}
+<div class="clearfix">
+  <div class="navbar navbar-default" role="navigation">
+     <div class="navbar-header"><a class="navbar-brand" href="mainestadisticas.php">Torneos</a></div>
+		 <ul class="nav navbar-nav navbar-left">
+			{% for torneozona in torneosZonas %} 
+				{% if torneozona.torneo.id == idTorneoActivo %} 
+					<li class="dropdown; active"> 
+				{% else %} 
+					<li class="dropdown">
+				{% endif %} 
+						<a class="dropdown-toggle" data-toggle="dropdown" href="#">{{ torneozona.torneo.nombre }} <span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							  <li> <a href="estadisticasPosiciones.php?idTorneoActivo={{ torneozona.torneo.id }}"> Posiciones </a> </li>
+							  <li> <a href="estadisticasGoleadores.php?idTorneoActivo={{ torneozona.torneo.id }}"> Goleadores </a> </li>
+							  <li> <a href="estadisticasExpulsados.php?idTorneoActivo={{ torneozona.torneo.id }}"> Sanciones </a> </li>
+							  <li> <a href="estadisticasEquipos.php?idTorneoActivo={{ torneozona.torneo.id }}"> Equipos </a> </li>
+							  <li> <a href="estadisticasProximafecha.php?idTorneoActivo={{ torneozona.torneo.id }}"> Proxima fecha </a> </li>
+							  <li> <a href="estadisticasPlayOff.php?idTorneoActivo={{ torneozona.torneo.id }}"> Play-Off </a> </li>
+						</ul>
+				 	</li>
+			 {% endfor %}
+			 		<li><a href="estadisticasAmistosos.php">Amistosos</a></li>
+		</ul>
+ </div>
+</div>
+{% endblock %}
