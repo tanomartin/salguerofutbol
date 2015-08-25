@@ -1,5 +1,3 @@
-<!-- #include "java.lang.Integer" -->
-
 calDateFormat    = "DD/MM/YYYY";
 topBackground    = "white";
 bottomBackground = "white";
